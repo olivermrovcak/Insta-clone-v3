@@ -13,4 +13,12 @@
         @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out
     }
 
+
+
+
+}
+
+.menu-item:hover {
+    background: rgba(156, 163, 175, 0.18);
+    border-radius: 25px;
 }
