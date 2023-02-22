@@ -5,7 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 import './index.css';
 import App from './App';
-import Start from './components/Start'
+import Main from './components/Main'
 
 
 ReactDOM.render(

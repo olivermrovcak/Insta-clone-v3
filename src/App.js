@@ -2,10 +2,10 @@ import { Routes, Route, Link } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import react, { useState, useEffect } from "react";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/SignIn/SignIn";
 
-import Start from "./components/Start";
-import AccoutPage from "./components/AccountPage";
+import Main from "./components/Main";
+import AccoutPage from "./components/Account/AccountPage";
 
 
 import {app} from './firebase/firebase';
@@ -44,7 +44,7 @@ useEffect(() => {
 
       {isUserSignedIn ? (
         <>
-        <Route path="/" element={<Start/>} />
+        <Route path="/" element={<Main/>} />
 
         <Route path="Account" element={<AccoutPage/>} />
      
