@@ -22,7 +22,7 @@ function Header() {
 
     return (
         <nav
-            className='shadow-sm border-r p-[12px]  border-[#a1a1a1] border-opacity-25 bg-black sticky  top-0 z-50  flex flex-col h-screen max-w-[245px]'>
+            className='shadow-sm border-r p-[12px]  border-[#a1a1a1] border-opacity-25 bg-black sticky  top-0 z-50 shrink  flex flex-col h-screen w-[245px] '>
 
             {/* LOGO */}
             <div className="p-[16px] mb-[16px]">

@@ -44,7 +44,7 @@ useEffect(() => {
 
   return (
 
-    <div className='bg-black h-screen overflow-y-scroll scrollbar-hide grid grid-cols-3 gap-4 '>
+    <div className='bg-black h-screen overflow-y-scroll scrollbar-hide flex items-start'>
         <Header/>
         <Feed/>
         <Modal />

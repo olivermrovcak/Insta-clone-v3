@@ -15,15 +15,15 @@ function Stories() {
 
   }, []);
   return (
-  <div className='flex space-x-3 p-6 mt-0 bg-white sm:mt-8 border-gray-200
-     border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black'>
+  <div className='flex space-x-3 py-6 mt-0 bg-black sm:mt-8
+      rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black'>
        
        
         {suggestions.map(profile => (
             <Story 
             key={profile.id} 
             img={profile.avatar}
-            username={profile.username}/>
+            userName={profile.username}/>
         ))}
 
     </div>)

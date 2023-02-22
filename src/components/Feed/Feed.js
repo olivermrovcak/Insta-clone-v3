@@ -8,7 +8,7 @@ function Feed() {
   return (
 
     <main className={`grid grid-cols-1 md:grid-cols-2 md:max-w-3xl
-    xl:grid-cols-3 xl:max-w-4xl mx-auto  `}>
+    xl:grid-cols-3 xl:max-w-4xl mx-auto `}>
         {/*LEFT SECTION*/}
         <section className='col-span-2'>
   
