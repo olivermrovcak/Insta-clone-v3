@@ -6,19 +6,60 @@
     .navBtn{
         @apply  h-6 
          cursor-pointer hover:scale-125 
-         transition-all  ease-out; 
-
+         transition-all  ease-out;
     }
     .btn{
         @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out
     }
+}
 
+.list-with-dots {
+    list-style: none;
+    padding: 0;
+    margin-left: 40px;
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    line-height: 20px;
+    color: #737373;
 
+}
 
+.list-with-dots li {
+    margin-right: 10px;
+    position: relative;
+}
 
+.list-with-dots li:after {
+    content: '\00B7'; /* Unicode for middle dot character */
+    position: absolute;
+    right: -7px;
+    color: #737373;
 }
 
 .menu-item:hover {
     background: rgba(156, 163, 175, 0.18);
     border-radius: 25px;
+}
+
+.loader-1 {
+    background-color: white;
+    animation: gg 2s infinite ease-in-out; /* Adjust duration and timing function */
+}
+
+.loader-2 {
+    background-color: white;
+    animation: gg 2s infinite ease-in; /* Adjust duration and timing function */
+}
+
+@keyframes gg {
+    0%, 100% {
+        background-color: white;
+        opacity: 0.02;
+    }
+    50% {
+        background-color: white;
+        opacity: 0.08;
+    }
 }

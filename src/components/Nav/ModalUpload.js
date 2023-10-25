@@ -11,7 +11,7 @@ import { addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/fi
 
 import { ref, getDownloadURL, uploadString } from 'firebase/storage';
 
-function Modal() {
+function ModalUpload() {
     const auth = getAuth(app);
     const [open, setOpen] = useRecoilState(modalStateAdd);
     const filePickerRef = useRef(null);
@@ -33,9 +33,6 @@ function Modal() {
                 caption: captionRef.current.value,
                 profileImg: auth.currentUser.photoURL,
                 timeStamp: serverTimestamp(),
-
-
-
         })
         console.log("New doc added with ID", docRef.id);
 
@@ -181,4 +178,4 @@ function Modal() {
   )
 }
 
-export default Modal;
+export default ModalUpload;

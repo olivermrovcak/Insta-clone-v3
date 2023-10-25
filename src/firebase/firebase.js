@@ -1,9 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";
-import { getAuth, signInWithPopup, GoogleAuthProvider, connectAuthEmulator } from "firebase/auth";
-
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyCjfJcJ-ck2xFcCeSHr64JNzR44rXHTCKo",
@@ -14,15 +11,9 @@ const firebaseConfig = {
     appId: "1:428830385552:web:5885668a0c4c2e7246ff15",
     measurementId: "G-MTBKE4CRDW"
   };
-  
 
   const app = !getApps().length ? initializeApp(firebaseConfig) : getApp;
   const db = getFirestore();
   const storage = getStorage();
-  
-  
-  
-  
 
-  
   export { app, db, storage };

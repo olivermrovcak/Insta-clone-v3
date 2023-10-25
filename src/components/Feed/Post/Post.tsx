@@ -15,11 +15,10 @@ interface Props {
     userId: string
 }
 
-
 export default function Post({id, username, userImg, postImg, caption, userId}: Props) {
 
     return (
-        <article className='bg-black text-white my-7 '>
+        <article className='bg-black text-white my-7'>
 
             {/* HEADER */}
             <PostHeader userName={username} imgSrc={userImg} uId={userId}/>
