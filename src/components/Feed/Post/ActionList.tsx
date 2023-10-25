@@ -2,7 +2,7 @@ import {HeartIcon as HeartIconFilled} from "@heroicons/react/solid";
 import {BookmarkIcon, ChatIcon, HeartIcon, PaperAirplaneIcon} from "@heroicons/react/outline";
 import React, {useEffect, useState} from "react";
 import {collection, deleteDoc, doc, onSnapshot, setDoc} from "firebase/firestore";
-import {app, db} from "../../firebase/firebase";
+import {app, db} from "../../../firebase/firebase";
 
 import {getAuth} from "firebase/auth";
 import PostLikes from "./PostLikes";

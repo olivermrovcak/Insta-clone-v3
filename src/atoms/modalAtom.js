@@ -29,3 +29,12 @@ export const userIdForFollowing = atom({
     default: "",
     
 })
+
+export const postDataForModal = atom({
+    key: 'postDataForModal',
+    default: {
+        opened: false,
+        id: ""
+    },
+
+})
