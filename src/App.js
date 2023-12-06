@@ -3,17 +3,15 @@ import {BrowserRouter} from "react-router-dom";
 import './index.css';
 import react, {useState, useEffect} from "react";
 import SignIn from "./components/SignIn/SignIn";
-
 import Main from "./components/Main";
 import AccoutPage from "./components/Account/AccountPage";
-
-
 import {app} from './firebase/firebase';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-
 import {doc, getDoc, collection, setDoc, addDoc, serverTimestamp} from 'firebase/firestore';
 import {db} from './firebase/firebase';
 import {Snapshot} from 'recoil';
+import Feed from "./components/Feed/Feed";
+import ThreadsFeed from "./components/ThreadsFeed/ThreadsFeed";
 
 function App() {
 
@@ -35,10 +33,12 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-
                 {isUserSignedIn ? (
                     <>
-                        <Route path="/" element={<Main/>}/>
+                        <Route path="/"  element={<Main/>}>
+                            <Route path="/" element={<Feed/>}/>
+                            <Route path="/threads" element={<ThreadsFeed/>}/>
+                        </Route>
                         <Route path="Account" element={<AccoutPage/>}/>
                     </>
                 ) : (

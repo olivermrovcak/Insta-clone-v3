@@ -3,19 +3,15 @@ import {
     UserGroupIcon,
     HeartIcon,
     PaperAirplaneIcon,
-
-    PlusSmIcon, SearchIcon
+    PlusSmIcon, SearchIcon,
+    AtSymbolIcon
 } from "@heroicons/react/outline";
-
 import {
     HomeIcon
 } from "@heroicons/react/outline";
-
-
 import {useRecoilState} from 'recoil';
 import MenuItem from "./MenuItem";
 import {FilmIcon, PlusCircleIcon, StopIcon} from "@heroicons/react/solid";
-
 
 
 function Header() {
@@ -40,11 +36,8 @@ function Header() {
                 <MenuItem text={"Upozornenia"} icon={<PaperAirplaneIcon className="w-[26px]"/>} link={"/"}/>
                 <MenuItem text={"Vytvoriť"} icon={<PlusCircleIcon className="w-[26px]"/>} link={"/"}/>
                 <MenuItem text={"Profil"} icon={<HomeIcon className="w-[26px]"/>} link={"/"}/>
-
-
+                <MenuItem text={"Threads"} icon={<AtSymbolIcon className="w-[26px]"/>} link={"/threads"}/>
             </ul>
-
-
         </nav>
     );
 }

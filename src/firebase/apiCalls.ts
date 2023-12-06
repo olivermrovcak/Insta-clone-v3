@@ -1,6 +1,20 @@
 import {collection, doc, getDoc, getDocs} from "firebase/firestore";
+import axios from "axios";
 
 import {db} from '../firebase/firebase';
+import { getAuth } from "firebase/auth";
+import {app} from '../firebase/firebase';
+
+const auth = getAuth(app as any);
+
+export async function getFollowingPosts() {
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.get("https://us-central1-oliverminstaclone.cloudfunctions.net/getAllPosts", {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    })
+}
 
 export async function getDataFromFirebase(path: string) {
     const postsCol = collection(db, path);
