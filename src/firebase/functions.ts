@@ -1,7 +1,5 @@
 import {collection, doc, getDoc, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "./firebase";
-import {firestore} from "firebase-admin";
-
 
 interface Props {
     path: string,

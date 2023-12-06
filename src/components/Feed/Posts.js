@@ -10,24 +10,28 @@ import {data} from "autoprefixer";
 
 function Posts() {
 
+    const auth = getAuth(app );
     const [dataForPostModal, setDataForPostModal] = useRecoilState(postDataForModal)
     const [posts, setPosts] = useState([]);
-
     const handleClose = () => setDataForPostModal({opened: false});
 
 
-    async function getPosts() {
-        var path = "posts";
-        var pathSegments = "";
-        await getDataFromDb({path, pathSegments}).then((res) => {
-            setPosts(res);
-
-        })
-    };
-
     useEffect(() => {
-        getPosts();
-    }, [db])
+        async function test() {
+            const idToken = await auth?.currentUser?.getIdToken(true);
+            fetch("http://127.0.0.1:5001/oliverminstaclone/us-central1/getAllPosts", {
+                headers: {
+                    'Authorization': idToken,
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => console.error('Error:', error));
+        }
+        test();
+    }, []);
 
     return (
 
