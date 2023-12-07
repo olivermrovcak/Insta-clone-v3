@@ -14,19 +14,13 @@ import ModalCommentForm from "./ModalCommentForm";
 import ModalCaption from "./ModalCaption";
 import ModalHeader from "./ModalHeader";
 
-
 interface Props {
     opened: boolean,
     onClose: () => void,
     postId: string
-
 }
 
-
-
-
 export default function PostModal({opened, onClose, postId}: Props) {
-
 
     const [comments, setComments] = useState<any>();
     const [post, setPost] = useState<any>();

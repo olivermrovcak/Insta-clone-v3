@@ -21,7 +21,7 @@ export default function Post({id, username, userImg, postImg, caption, userId}: 
         <article className='bg-black text-white my-7'>
 
             {/* HEADER */}
-            <PostHeader userName={username} imgSrc={userImg} uId={userId}/>
+            <PostHeader userName={username} imgSrc={userImg} uId={userId} postId={id}/>
 
             {/* POST IMG*/}
             <PostImg imgSrc={postImg}/>

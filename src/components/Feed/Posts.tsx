@@ -4,6 +4,7 @@ import {useRecoilState} from "recoil";
 import {postDataForModal, userIdForFollowing} from "../../atoms/modalAtom";
 import {Post as PostType} from "../../utils/types/Post";
 import {getFollowingPosts} from '../../firebase/apiCalls';
+import PostUpdateModal from "./Post/PostModal/PostUpdateModal";
 
 function Posts() {
 
@@ -14,6 +15,7 @@ function Posts() {
         try {
             const response = await getFollowingPosts();
             setPosts(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error("Failed to fetch posts:", error);
         }
@@ -26,8 +28,8 @@ function Posts() {
     return (
         <div className="max-w-[470px] mx-auto">
             {posts.map((post) => (
-                <Post key={post.uid}
-                      id={post.uid}
+                <Post key={post.id}
+                      id={post.id ?? ""}
                       username={post.username}
                       userImg={post.profileImg}
                       postImg={post.image}
@@ -35,6 +37,7 @@ function Posts() {
                       userId={post.uid}
                 />
             ))}
+            <PostUpdateModal/>
         </div>
     )
 }

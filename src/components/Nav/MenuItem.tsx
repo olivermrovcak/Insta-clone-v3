@@ -5,12 +5,14 @@ import '../../index.css';
 interface MenuProps {
     text: string
     icon: ReactNode
-    link: any
+    link?: any
+    onClick?: any
 }
 
-export default function MenuItem({text, icon, link}: MenuProps) {
+export default function MenuItem({text, icon, link, onClick}: MenuProps) {
     return (
-        <Link to={link} className="rounded-full hover:bg-gray-50 hover:bg-opacity-[6%] transition-all group">
+        <Link to={link} onClick={onClick}
+              className="rounded-full hover:bg-gray-50 hover:bg-opacity-[6%] transition-all group">
             <li className="flex flex-row items-center  ">
                 <div className="w-[30px] relative group-hover:scale-[105%]  ">
                     {icon}

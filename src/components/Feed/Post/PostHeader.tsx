@@ -1,14 +1,37 @@
 import {Link} from "react-router-dom";
-import {DotsHorizontalIcon} from "@heroicons/react/outline";
+import {DotsHorizontalIcon, TrashIcon, PencilIcon} from "@heroicons/react/outline";
 import React from "react";
+import {getAuth} from "firebase/auth";
+import {app} from "../../../firebase/firebase";
+import {deletePost} from "../../../firebase/apiCalls";
+import {useRecoilState} from "recoil";
+import {modalStateAdd, postUpdateModal} from "../../../atoms/modalAtom";
 
 interface Props {
     imgSrc: any,
     uId: string,
     userName: any,
+    postId?: string
 }
 
-export default function PostHeader({imgSrc, uId, userName}: Props) {
+export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
+
+    const auth = getAuth(app as any);
+    const [editDialogOpened, setEditDialogOpened] = useRecoilState(postUpdateModal);
+
+    function handleEdit() {
+        setEditDialogOpened({
+            opened: true,
+            id: postId ?? ""
+        });
+    }
+
+    function handleDelete() {
+        deletePost(postId ?? "").then((response: any ) =>  {
+            console.log(response)
+        });
+    }
+
     return <div className="flex items-center py-2">
         {imgSrc ? (
             <img className="rounded-full h-[32px] w-[32px] object-contain  mr-3" src={imgSrc} alt=""/>
@@ -36,6 +59,14 @@ export default function PostHeader({imgSrc, uId, userName}: Props) {
                 </div>
             )}
         </div>
-        <DotsHorizontalIcon className="h-5  "/>
+
+        {auth.currentUser?.uid === uId ? (
+            <div className="space-x-2 flex flex-row">
+                <PencilIcon onClick={handleEdit} className="h-5  cursor-pointer"/>
+                <TrashIcon onClick={handleDelete} className="h-5  cursor-pointer"/>
+            </div>
+        ) : (
+            <DotsHorizontalIcon  className="h-5 mr-3"/>
+        )}
     </div>;
 }

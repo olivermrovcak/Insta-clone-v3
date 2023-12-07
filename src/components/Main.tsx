@@ -4,22 +4,18 @@ import Feed from './Feed/Feed';
 import {app} from '../firebase/firebase';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import ModalLikes from './Feed/ModalLikes';
-import { Outlet } from 'react-router';
+import {Outlet} from 'react-router';
+import ModalUpload from "./Nav/ModalUpload";
 
 function Main() {
-
-    const auth = getAuth(app as any);
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     return (
         <div className='bg-black h-screen overflow-y-scroll scrollbar-hide flex items-start'>
             <Header/>
             <Outlet/>
             <ModalLikes/>
+            <ModalUpload />
         </div>
-
     );
 }
 
