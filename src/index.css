@@ -121,3 +121,35 @@ code {
         opacity: 0.08;
     }
 }
+@keyframes rainbow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes rainbowAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.rainbow-linear-progress {
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red);
+    background-size: 400% 400%;
+    animation: rainbowAnimation 8s ease-in-out infinite;
+}
+
+.editableContent:empty::before {
+    content: attr(data-placeholder);
+    color: #808080FF;
+    cursor: text;
+    display: block; /* For Firefox */
+}
+
+.editableContent:focus::before {
+    content: none;
+}
+
+

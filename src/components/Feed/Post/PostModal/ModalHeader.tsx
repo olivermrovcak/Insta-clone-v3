@@ -1,4 +1,4 @@
-import {DotsHorizontalIcon} from "@heroicons/react/outline";
+import {EllipsisHorizontalCircleIcon} from "@heroicons/react/24/outline";
 import React from "react";
 
 interface Props {
@@ -20,6 +20,6 @@ export default function ModalHeader({profileImg, userName}:Props) {
             <p className="text-[14px] font-bold">{userName}</p>
             <p className="text-[12px] ">Location</p>
         </div>
-        <DotsHorizontalIcon className="h-5  "/>
+        <EllipsisHorizontalCircleIcon className="h-5  "/>
     </div>;
 }

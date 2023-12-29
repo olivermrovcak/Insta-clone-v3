@@ -1,6 +1,6 @@
-import {SearchIcon,
+import {MagnifyingGlassIcon,
    
-  } from "@heroicons/react/outline";
+  } from "@heroicons/react/24/outline";
 
 
 import React, {useState, useEffect,useRef} from 'react';
@@ -67,7 +67,7 @@ function SearchBar() {
     <div className='max-w-xs hidden md:inline-block '>
     <div className='flex mt-1 relative  rounded-md ' ref={ref}>
       <div className='absolute inset-y-0 pl-3 flex items-center pointer-events-none'>
-        <SearchIcon className='h-5 w-5  text-gray-500'/>
+        <MagnifyingGlassIcon className='h-5 w-5  text-gray-500'/>
       </div>
          
       <input 

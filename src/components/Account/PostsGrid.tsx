@@ -1,5 +1,5 @@
 import React from 'react'
-import {CameraIcon} from "@heroicons/react/outline";
+import {CameraIcon} from "@heroicons/react/24/outline";
 
 interface props {
     posts: post[]

@@ -1,35 +1,67 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Thread as ThreadType} from "../../utils/types/Thread";
-import PostHeader from "../Feed/Post/PostHeader";
-import ActionList from "../Feed/Post/ActionList";
+import {getUserByUid} from "../../firebase/apiCalls";
+import {useRecoilState} from "recoil";
+import {threadOverview} from "../../atoms/modalAtom";
+import {useNavigate} from "react-router-dom";
+import {CheckBadgeIcon} from "@heroicons/react/24/solid";
+import AttachmentRender from "./AttachmentRender";
+import ThreadsActionList from "./ThreadsActionList";
 
-function Thread({uid, text, userName, timeStamp, attachment}: ThreadType) {
+function Thread({uid, text, timeStamp, attachment, id}: ThreadType) {
 
-    //function that truncates text to 100 characters
-    function truncateText(text: string) {
-        return text.length > 300 ? text.substring(0, 300) + "..." : text;
+    const [user, setUser] = React.useState<any>(null);
+    const [, setOpenedThread] = useRecoilState(threadOverview);
+    const navigate = useNavigate();
+
+    function getUser() {
+        getUserByUid(uid).then((response) => {
+            setUser(response.data)
+        }).catch((error) => {
+            console.error(error)
+        });
     }
 
-    return (
-        <div className="text-white border border-1 border-gray-200 rounded-2xl flex flex-col w-full p-4">
-            <PostHeader
-                imgSrc={"https://lh3.googleusercontent.com/a/ACg8ocIAzbOHjRmqgboCYPGSSgio2Z8FxhU-fv2mS-xcQomX=s96-c"}
-                uId={uid}
-                userName={userName}
-            />
-            <div className="w-full">
-                <p>
-                    {truncateText(text)}
-                </p>
-            </div>
+    function handleSetOpenedThread() {
+        navigate(`/threads/${id}`)
+        setOpenedThread({opened: true, id: id, uid: uid})
+    }
 
-            <div className="w-full p-4 pl-0">
-                <div className="">
-                    <img src={attachment} className="object-contain rounded-md"/>
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    return (
+        <div
+             className="text-white cursor-pointer transition-all
+             border-b  border-b-gray-200 border-opacity-20  flex flex-row w-full py-2">
+            <div className="min-h-full flex flex-col items-center !w-16 ">
+                {user?.photoUrl ? (
+                    <img className="rounded-full h-[32px] w-[32px] object-contain" src={user?.photoUrl} alt=""/>
+                ) : (
+                    <div className="rounded-full h-[32px] w-[32px] object-contain  loader-2"></div>
+                )}
+                <div className="w-[1px]  border-r-2 border-r-gray-400 border-opacity-30 my-2 min-h-[20px] h-full"></div>
+                <div className="relative ">
+                    <img onClick={handleSetOpenedThread} className="rounded-full h-4 object-contain" src={user?.photoUrl} alt=""/>
+                    <img className="rounded-full h-4 absolute left-[65%] bottom-0 ring-2 ring-[#0f0f0f]"
+                         src={user?.photoUrl} alt=""/>
                 </div>
             </div>
-
-            <ActionList postId={uid}/>
+            <div className="w-full pl-3 min-h-[100px] h-[100%] flex flex-col items-start justify-between">
+                <div className="flex flex-row items-center">
+                    <p className="font-bold text-[14px]">{user?.name}</p>
+                    <CheckBadgeIcon className="h-5 text-blue-500 mx-2"/>
+                </div>
+                <p onClick={handleSetOpenedThread} className="text-sm text-white ">{text}</p>
+                {attachment &&
+                    <AttachmentRender url={attachment}/>
+                }
+                <ThreadsActionList openThread={ () => handleSetOpenedThread()} threadId={id}/>
+                <p className="text-gray-500 text-sm hover:underline cursor-pointer w-fit justify-self-end">
+                    1:13 AM · Dec 19, 2023
+                </p>
+            </div>
         </div>
     )
 }

@@ -18,7 +18,7 @@ export default function MenuItem({text, icon, link, onClick}: MenuProps) {
                     {icon}
                 </div>
 
-                <p className="pl-3">{text}</p>
+                <p className="pl-3 hidden sm:block">{text}</p>
             </li>
         </Link>
 

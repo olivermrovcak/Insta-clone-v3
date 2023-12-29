@@ -30,6 +30,7 @@ function ModalUpload() {
         }
 
         await uploadPost(post).then((response) => {
+            console.log(post)
             console.log(response);
         }).catch((error) => {
             console.log(error);
@@ -42,12 +43,10 @@ function ModalUpload() {
     //prida obrazok k postu
     const addImageToPost = (e) => {
         const reader = new FileReader();
-        if (e.target.files[0]) {
-            reader.readAsDataURL(e.target.files[0]);
-        }
-        reader.onload = (readerEvent) => {
-            setSelectedFile(readerEvent.target.result);
-        }
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            setSelectedFile(reader.result);
+        };
     }
 
     return (<Transition.Root show={open} as={Fragment}>

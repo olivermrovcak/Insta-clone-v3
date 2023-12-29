@@ -11,7 +11,9 @@ import Main from './components/Main'
 ReactDOM.render(
   <React.StrictMode>
      <RecoilRoot>
-       <App/>
+         <BrowserRouter>
+             <App/>
+         </BrowserRouter>
      </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')

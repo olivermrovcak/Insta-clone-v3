@@ -1,22 +1,20 @@
-import {Routes, Route, Link} from "react-router-dom";
-import {BrowserRouter} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 import './index.css';
-import react, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import SignIn from "./components/SignIn/SignIn";
 import Main from "./components/Main";
 import AccoutPage from "./components/Account/AccountPage";
 import {app} from './firebase/firebase';
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import {doc, getDoc, collection, setDoc, addDoc, serverTimestamp} from 'firebase/firestore';
-import {db} from './firebase/firebase';
-import {Snapshot} from 'recoil';
 import Feed from "./components/Feed/Feed";
-import ThreadsFeed from "./components/ThreadsFeed/ThreadsFeed";
+import ThreadOverview from "./components/ThreadsFeed/ThreadOverview";
+import ThreadsMain from "./components/ThreadsFeed/ThreadsMain";
 
 function App() {
 
     const [isUserSignedIn, setIsUserSignedIn] = useState(false);
     const auth = getAuth(app);
+    const navigate = useNavigate();
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -29,15 +27,18 @@ function App() {
         return onAuthStateChanged
     }, []);
 
-
     return (
-        <BrowserRouter>
             <Routes>
                 {isUserSignedIn ? (
                     <>
-                        <Route path="/"  element={<Main/>}>
-                            <Route path="/" element={<Feed/>}/>
-                            <Route path="/threads" element={<ThreadsFeed/>}/>
+                        <Route path="/" element={<Main/>}>
+                            <Route path="/posts" element={<Feed/>}>
+                                <Route path="following" element={<Feed />}/>
+                                <Route path="forYou" element={<Feed/>}/>
+                            </Route>
+                        </Route>
+                        <Route path="/threads" element={<ThreadsMain/>}>
+                            <Route path=":threadId" element={<ThreadOverview/>}/>
                         </Route>
                         <Route path="Account" element={<AccoutPage/>}/>
                     </>
@@ -45,7 +46,6 @@ function App() {
                     <Route path="/" element={<SignIn/>}/>
                 )}
             </Routes>
-        </BrowserRouter>
     );
 
 }

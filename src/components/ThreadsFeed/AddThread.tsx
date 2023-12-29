@@ -1,32 +1,47 @@
 import React from 'react'
-import {PaperClipIcon} from "@heroicons/react/outline";
+import {PaperClipIcon} from "@heroicons/react/24/outline";
 import {getAuth} from "firebase/auth";
 import {app} from "../../firebase/firebase";
+import {uploadThread} from "../../firebase/apiCalls";
+import {useRecoilState} from "recoil";
+import {postDataForModal, threadAddModal} from "../../atoms/modalAtom";
 
 function AddThread() {
 
     const auth = getAuth(app as any);
+    const [text, setText] = React.useState<string>("");
+    //threadAddModal
+    const [openedThread, setOpenedThread] = useRecoilState(threadAddModal)
+
+    function handleAddThread() {
+        if (text === "") {
+            return;
+        }
+        const thread = {
+            uid: auth.currentUser?.uid,
+            userName: auth.currentUser?.displayName,
+            text: text,
+            attachment: "",
+        }
+        uploadThread(thread).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.error(error)
+        });
+    }
+
+    function handleOpenThreadModal() {
+        setOpenedThread(true)
+    }
 
     return (
-        <div className="text-white border border-1 border-gray-200 rounded-2xl flex flex-col w-full items-center p-3">
-            <div className="w-full flex flex-row items-start ">
-                <img className="rounded-full h-[32px] w-[32px] object-contain  mr-3" src={auth?.currentUser?.photoURL as string} alt=""/>
-                <div className="w-full overflow-x-hidden">
-                        <textarea
-                            className="bg-transparent block resize-none p-0 w-full text-2xl overflow-x-hidden break-words outline-none border-none
-                            focus:ring-0 focus:outline-none focus:border-none  text-white"
-                            placeholder={`What's happening, ${auth?.currentUser?.displayName?.split(" ")[0]}?`  }
-                        >
-                        </textarea>
-                </div>
-            </div>
-            <div className="border border-0 border-b-[1px] w-full my-4 border-[#333333]"></div>
-            <div className="w-full flex justify-between items-center px-2">
-                <PaperClipIcon className="h-6 w-6 mr-2 text-blue-500 cursor-pointer"/>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl ">
-                    POST
-                </button>
-            </div>
+        <div className="w-full flex flex-row justify-between items-center px-2 border-b py-5 border-b-gray-200 border-opacity-20">
+            <img className="rounded-full h-[32px] w-[32px] object-contain  mr-3"
+                 src={auth?.currentUser?.photoURL as string} alt=""/>
+            <p onClick={handleOpenThreadModal} className=" text-stone-500 text-left w-full">Začnite vlákno...</p>
+            <button onClick={handleAddThread} className="bg-white hover:bg-gray-200 text-black font-bold text-[14px] px-4  py-1 rounded-xl ">
+                Uverejniť
+            </button>
         </div>
     )
 }

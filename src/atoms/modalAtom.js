@@ -31,3 +31,19 @@ export const postUpdateModal = atom({
         opened: false, id: ""
     },
 })
+
+export const loadingState = atom({
+    key: 'loadingState', default: false,
+})
+
+export const threadOverview = atom({
+    key: 'threadOverview', default: {
+        opened: false, id: "", uid: ""
+    },
+})
+
+export const threadAddModal = atom({
+    key: 'threadAddModal', default: false,
+})
+
+

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {DotsHorizontalIcon, TrashIcon, PencilIcon} from "@heroicons/react/outline";
+import {EllipsisHorizontalCircleIcon, TrashIcon, PencilIcon} from "@heroicons/react/24/outline";
 import React from "react";
 import {getAuth} from "firebase/auth";
 import {app} from "../../../firebase/firebase";
@@ -66,7 +66,7 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
                 <TrashIcon onClick={handleDelete} className="h-5  cursor-pointer"/>
             </div>
         ) : (
-            <DotsHorizontalIcon  className="h-5 mr-3"/>
+            <EllipsisHorizontalCircleIcon  className="h-5 mr-3"/>
         )}
     </div>;
 }

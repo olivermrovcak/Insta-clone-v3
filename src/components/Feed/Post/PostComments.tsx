@@ -1,4 +1,4 @@
-import {EmojiHappyIcon} from "@heroicons/react/outline";
+import {FaceSmileIcon} from "@heroicons/react/24/outline";
 import React, {useEffect, useState} from "react";
 import {
     addDoc,
@@ -28,7 +28,7 @@ export default function PostComments({actionSendComment, id}: Props) {
 
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState<any>([]);
-    const [dataForPostModal, setDataForPostModal] = useRecoilState(postDataForModal);
+    const [, setDataForPostModal] = useRecoilState(postDataForModal);
 
     async function getComments() {
         const path = "posts";
@@ -64,7 +64,6 @@ export default function PostComments({actionSendComment, id}: Props) {
             opened: true,
             id: id
         } as any);
-
     }
 
     useEffect(() => {
@@ -72,14 +71,14 @@ export default function PostComments({actionSendComment, id}: Props) {
     }, [db, id])
 
     return <>
-        <Comments comments={comments} setData={ handleOpenComments} />
+        <Comments comments={comments} setData={handleOpenComments}/>
 
         <form className='flex items-center  ' action="src/components/Feed/Post/Post.tsx">
             <input value={comment} onChange={e => setComment(e.target.value)} onKeyDown={handleKeyDown}
                    placeholder='Pridaj komentár...'
                    className='border-none bg-black flex-1 pl-0 text-gray-500 focus:ring-0 outline-none text-[12px]'
                    type="text"/>
-            <EmojiHappyIcon className='h-4'/>
+            <FaceSmileIcon className='h-4'/>
         </form>
 
     </>
@@ -87,7 +86,7 @@ export default function PostComments({actionSendComment, id}: Props) {
 
 interface CommentsProps {
     comments: any[],
-    setData: ()=> void,
+    setData: () => void,
 }
 
 function Comments({comments, setData}: CommentsProps) {
@@ -100,7 +99,7 @@ function Comments({comments, setData}: CommentsProps) {
                     <p className='text-sm flex-1 '>
                         <span
                             className='font-bold'>{comments[0]?.data().username}</span>{" "}{comments[0]?.data().comment}
-                        </p>
+                    </p>
                 </div>
                 <p onClick={setData} className="text-gray-300 text-[14px] cursor-pointer">Zobrazit všetky
                     komentare({comments?.length})</p>

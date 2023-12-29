@@ -1,7 +1,9 @@
 export type Thread = {
+    id?: string,
     text: string,
-    timeStamp: string,
+    timeStamp?: any,
     uid: string,
-    userName: string,
+    userName?: string,
     attachment: string,
+    comments?: any[],
 }

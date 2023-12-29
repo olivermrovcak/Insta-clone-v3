@@ -1,12 +1,7 @@
 import Modal from "@mui/material/Modal";
 import {
-    BookmarkIcon,
-    ChatIcon,
-    DotsHorizontalIcon,
-    EmojiHappyIcon,
     HeartIcon,
-    PaperAirplaneIcon
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import React, {useEffect, useState} from "react";
 import getDataFromDb, {getDocument} from "../../../../firebase/functions";
 import ModalActionList from "./ModalActionList";
@@ -55,19 +50,19 @@ export default function PostModal({opened, onClose, postId}: Props) {
         onClose={onClose}
     >
         <section
-            className="absolute w-[50vw]  select-none ring-0 focus:ring-0 border-none  -translate-y-[50%] -translate-x-[50%] left-[50%] top-[50%] grid grid-cols-2  ">
+            className="absolute w-[90vw] sm:w-[70vw] md:w-[50vw] min-h-[60vh]   select-none ring-0 focus:ring-0 border-none  -translate-y-[50%] -translate-x-[50%] left-[50%] top-[50%] grid grid-cols-1 sm:grid-cols-2  ">
 
-            <div className=" bg-black flex justify-center items-center ">
+            <div className=" bg-black flex justify-center items-center  max-w-[90vw] ">
                 <img
                     src={post?.image}
                     className="object-cover w-full"
                 />
             </div>
 
-            <div className="bg-black text-white flex flex-col">
+            <div className="bg-black text-white flex flex-col ">
 
                 {/*HEADER*/}
-                <ModalHeader userName={post?.username} profileImg={post?.profileImg} />
+                <ModalHeader userName={post?.username} profileImg={post?.profileImg}/>
 
                 <div
                     className="w-full p-3 flex flex-1  items-start flex-col overflow-y-scroll scrollbar-hide max-h-[300px] ">
@@ -123,7 +118,5 @@ function PostModalComments({comments}: PostModalCommentProps) {
         ) : (
             ""
         )}
-
-
     </>;
 }

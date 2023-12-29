@@ -1,5 +1,5 @@
 import React from 'react'
-import {PlusIcon} from "@heroicons/react/outline";
+import {PlusIcon} from "@heroicons/react/24/outline";
 
 interface props {
     user: user,
