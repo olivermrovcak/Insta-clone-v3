@@ -9,8 +9,12 @@ import {
     MenuItem,
     Button,
 } from "@material-tailwind/react";
+import {useNavigate} from "react-router-dom";
 
 function ThreadsMenu() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="px-24 bg-[#0f0f0f] bg-opacity-90 backdrop-blur-md p-4 flex flex-row justify-between w-full sticky top-0 !z-[100]">
             <div className="w-8  cursor-pointer">
@@ -45,7 +49,7 @@ function ThreadsMenu() {
                 <MenuList
                     className="!z-[101] bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold "
                      onResize={undefined} onResizeCapture={undefined}>
-                    <MenuItem className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
+                    <MenuItem onClick={ () => navigate("/posts/following")} className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
                               onResize={undefined} onResizeCapture={undefined}>Spat na Instagram</MenuItem>
                     <MenuItem className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
                               onResize={undefined} onResizeCapture={undefined}>Odhlásiť sa</MenuItem>

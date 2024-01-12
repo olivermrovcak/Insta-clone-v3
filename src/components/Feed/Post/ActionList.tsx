@@ -48,10 +48,7 @@ export default function ActionList({postId}: Props) {
                 uid: currUser?.uid
             })
         }
-
-
     }
-
 
     return <div>
         <div className="flex justify-between pl-0 pt-4 pb-2 select-none">
@@ -60,11 +57,8 @@ export default function ActionList({postId}: Props) {
                 <ChatBubbleLeftIcon onClick={handleOpenPostDialog} className="btn"/>
                 <PaperAirplaneIcon className="btn rotate-45 pb-1"/>
             </div>
-
             <BookmarkIcon className="btn"/>
         </div>
-
-
         <PostLikes likesCount={likes.length}/>
     </div>
 

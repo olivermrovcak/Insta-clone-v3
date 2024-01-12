@@ -8,28 +8,15 @@ import {CheckBadgeIcon} from "@heroicons/react/24/solid";
 import AttachmentRender from "./AttachmentRender";
 import ThreadsActionList from "./ThreadsActionList";
 
-function Thread({uid, text, timeStamp, attachment, id}: ThreadType) {
+function Thread({uid, text, timeStamp, attachment, id, user}: ThreadType) {
 
-    const [user, setUser] = React.useState<any>(null);
     const [, setOpenedThread] = useRecoilState(threadOverview);
     const navigate = useNavigate();
-
-    function getUser() {
-        getUserByUid(uid).then((response) => {
-            setUser(response.data)
-        }).catch((error) => {
-            console.error(error)
-        });
-    }
 
     function handleSetOpenedThread() {
         navigate(`/threads/${id}`)
         setOpenedThread({opened: true, id: id, uid: uid})
     }
-
-    useEffect(() => {
-        getUser();
-    }, []);
 
     return (
         <div

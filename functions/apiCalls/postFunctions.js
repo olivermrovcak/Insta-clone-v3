@@ -61,6 +61,39 @@ module.exports.getAllPosts = functions.https.onRequest(async (request, response)
     });
 });
 
+module.exports.getPost = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        try {
+            const {postId} = request.body;
+            if (!postId) {
+                return response.status(400).send('Invalid post ID');
+            }
+
+            // Get the post document
+            const postSnapshot = await admin.firestore().collection('posts').doc(postId).get();
+            if (!postSnapshot.exists) {
+                return response.status(404).send('Post not found');
+            }
+
+            // Get the comments subcollection
+            const commentsSnapshot = await admin.firestore().collection('posts').doc(postId).collection('comments').get();
+            const comments = commentsSnapshot.docs.map(doc => doc.data());
+
+            // Combine the post data and comments into a single object
+            const postData = postSnapshot.data();
+            const postWithComments = {
+                ...postData,
+                comments: comments
+            };
+
+            response.status(200).json(postWithComments);
+        } catch (error) {
+            console.error('Error getting post', error);
+            response.status(500).send('Internal Server Error');
+        }
+    });
+});
+
 module.exports.uploadPost = functions.https.onRequest((request, response) => {
     cors(request, response, async () => {
         try {

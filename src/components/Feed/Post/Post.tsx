@@ -24,7 +24,7 @@ export default function Post({id, username, userImg, postImg, caption, userId}: 
             <PostHeader userName={username} imgSrc={userImg} uId={userId} postId={id}/>
 
             {/* POST IMG*/}
-            <PostImg imgSrc={postImg}/>
+            <PostImg imgSrc={postImg} postId={id}/>
 
             {/* BUTTONS */}
             <ActionList postId={id}/>

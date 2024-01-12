@@ -6,4 +6,5 @@ export type Thread = {
     userName?: string,
     attachment: string,
     comments?: any[],
+    user?: any,
 }

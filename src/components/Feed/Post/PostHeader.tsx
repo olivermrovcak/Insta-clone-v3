@@ -5,7 +5,9 @@ import {getAuth} from "firebase/auth";
 import {app} from "../../../firebase/firebase";
 import {deletePost} from "../../../firebase/apiCalls";
 import {useRecoilState} from "recoil";
-import {modalStateAdd, postUpdateModal} from "../../../atoms/modalAtom";
+import {modalStateAdd, postUpdateModal, reportModal} from "../../../atoms/modalAtom";
+import {Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/react";
+import {Bars2Icon} from "@heroicons/react/24/solid";
 
 interface Props {
     imgSrc: any,
@@ -18,6 +20,7 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
 
     const auth = getAuth(app as any);
     const [editDialogOpened, setEditDialogOpened] = useRecoilState(postUpdateModal);
+    const [reportModalState, setReportModalState] = useRecoilState(reportModal);
 
     function handleEdit() {
         setEditDialogOpened({
@@ -30,6 +33,13 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
         deletePost(postId ?? "").then((response: any ) =>  {
             console.log(response)
         });
+    }
+
+    function handleReportPost() {
+        setReportModalState({
+            opened: true,
+            id: postId
+        })
     }
 
     return <div className="flex items-center py-2">
@@ -66,7 +76,17 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
                 <TrashIcon onClick={handleDelete} className="h-5  cursor-pointer"/>
             </div>
         ) : (
-            <EllipsisHorizontalCircleIcon  className="h-5 mr-3"/>
+            <Menu placement="bottom">
+                <MenuHandler>
+                    <EllipsisHorizontalCircleIcon className="h-5 cursor-pointer hover:scale-[110%] transition-all"/>
+                </MenuHandler>
+                <MenuList
+                    className="!z-[101] bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold "
+                    onResize={undefined} onResizeCapture={undefined}>
+                    <MenuItem onClick={handleReportPost} className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
+                              onResize={undefined} onResizeCapture={undefined}>Nahlásiť</MenuItem>
+                </MenuList>
+            </Menu>
         )}
     </div>;
 }

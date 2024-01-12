@@ -4,6 +4,7 @@ const functions = require('firebase-functions');
 const cors = require('cors')({origin: true});
 const {Firestore} = require('firebase-admin/firestore');
 const {v4: uuidv4} = require('uuid');
+const {getUserByUid} = require("../index");
 
 module.exports.getAllThreads = functions.https.onRequest(async (request, response) => {
     cors(request, response, async () => {
@@ -46,12 +47,15 @@ module.exports.getAllThreadsFollowing = functions.https.onRequest(async (request
 
                 const threads = [];
 
-                threadsSnapshot.forEach((doc) => {
+                await Promise.all(threadsSnapshot.docs.map(async (doc) => {
+                    const threadData = doc.data();
+                    const userData = (await admin.firestore().collection('users').doc(threadData.uid).get()).data();
                     threads.push({
-                        id: doc.id, // Include the thread ID
-                        ...doc.data(), // Include the thread data
+                        id: doc.id,
+                        ...threadData,
+                        user: userData,
                     });
-                });
+                }));
 
                 // Fetch the reposted threads from the users the current user is following
                 const repostsSnapshot = await admin.firestore().collection('repostedThreads')
@@ -59,12 +63,17 @@ module.exports.getAllThreadsFollowing = functions.https.onRequest(async (request
                     .orderBy('timeStamp', 'desc')
                     .get();
 
-                repostsSnapshot.forEach((doc) => {
+                await Promise.all(repostsSnapshot.docs.map(async (doc) => {
+                    const repostData = doc.data();
+                    const userData = (await admin.firestore().collection('users').doc(repostData.uid).get()).data();
+                    const threadSnapshot = (await admin.firestore().collection('threads').doc(repostData.threadId).get()).data();
                     threads.push({
-                        id: doc.id, // Include the repost ID
-                        ...doc.data(), // Include the repost data
+                        id: doc.id,
+                        ...repostData,
+                        user: userData,
+                        thread: threadSnapshot,
                     });
-                });
+                }));
 
                 // Fetch the threads of the logged in user
                 const userThreadsSnapshot = await admin.firestore().collection('threads')
@@ -72,12 +81,15 @@ module.exports.getAllThreadsFollowing = functions.https.onRequest(async (request
                     .orderBy('timeStamp', 'desc')
                     .get();
 
-                userThreadsSnapshot.forEach((doc) => {
+                await Promise.all(userThreadsSnapshot.docs.map(async (doc) => {
+                    const threadData = doc.data();
+                    const userData = (await admin.firestore().collection('users').doc(threadData.uid).get()).data();
                     threads.push({
-                        id: doc.id, // Include the thread ID
-                        ...doc.data(), // Include the thread data
+                        id: doc.id,
+                        ...threadData,
+                        user: userData,
                     });
-                });
+                }));
 
                 // Fetch the reposted threads of the logged in user
                 const userRepostsSnapshot = await admin.firestore().collection('repostedThreads')
@@ -85,12 +97,17 @@ module.exports.getAllThreadsFollowing = functions.https.onRequest(async (request
                     .orderBy('timeStamp', 'desc')
                     .get();
 
-                userRepostsSnapshot.forEach((doc) => {
+                await Promise.all(userRepostsSnapshot.docs.map(async (doc) => {
+                    const repostData = doc.data();
+                    const userData = (await admin.firestore().collection('users').doc(repostData.uid).get()).data();
+                    const threadSnapshot = (await admin.firestore().collection('threads').doc(repostData.threadId).get()).data();
                     threads.push({
-                        id: doc.id, // Include the repost ID
-                        ...doc.data(), // Include the repost data
+                        id: doc.id,
+                        ...repostData,
+                        user: userData,
+                        thread: threadSnapshot,
                     });
-                });
+                }));
 
                 threads.sort((a, b) => b.timeStamp - a.timeStamp);
 

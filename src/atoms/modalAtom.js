@@ -46,4 +46,10 @@ export const threadAddModal = atom({
     key: 'threadAddModal', default: false,
 })
 
+export const reportModal = atom({
+    key: 'reportModal', default: {
+        opened: false, id: "",
+    },
+})
+
 

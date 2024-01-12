@@ -47,6 +47,7 @@ function Threads() {
                             userName={thread?.userName}
                             timeStamp={thread?.timeStamp}
                             attachment={thread?.attachment}
+                            user={thread?.user}
                         />
                     )
                 } else {
@@ -56,6 +57,8 @@ function Threads() {
                             uid={thread?.uid}
                             timestamp={thread?.timeStamp}
                             threadId={thread?.threadId}
+                            user={thread?.user}
+                            thread={thread?.thread}
                         />
                     )
                 }

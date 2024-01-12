@@ -7,34 +7,12 @@ import {ArrowPathRoundedSquareIcon} from "@heroicons/react/24/outline";
 interface props {
     uid: string,
     timestamp: string,
-    threadId: string
+    threadId: string,
+    user: any
+    thread: any
 }
 
-export default function Repost({uid, timestamp, threadId}: props) {
-
-    const [user, setUser] = React.useState<any>(null);
-    const [thread, setThread] = React.useState<any>(null);
-
-    function getThread() {
-        getThreadById(threadId).then((response) => {
-            setThread(response.data)
-        }).catch((error) => {
-            console.error(error)
-        })
-    }
-
-    function getUser() {
-        getUserByUid(uid).then((response) => {
-            setUser(response.data)
-        }).catch((error) => {
-            console.error(error)
-        });
-    }
-
-    useEffect(() => {
-        getThread();
-        getUser();
-    }, []);
+export default function Repost({uid, timestamp, threadId, user, thread}: props) {
 
     return (
         <div>
@@ -48,7 +26,9 @@ export default function Repost({uid, timestamp, threadId}: props) {
                     uid={thread?.uid}
                     attachment={thread?.attachment}
                     id={thread?.id}
-                    userName={thread?.userName}/>
+                    userName={thread?.userName}
+                    user={user}
+                />
             }
         </div>
 

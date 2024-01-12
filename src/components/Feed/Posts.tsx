@@ -7,6 +7,7 @@ import {getAllPosts, getFollowingPosts} from '../../firebase/apiCalls';
 import PostUpdateModal from "./Post/PostModal/PostUpdateModal";
 import PostModal from "./Post/PostModal/PostModal";
 import {useNavigate} from "react-router-dom";
+import ReportModal from "./ReportModal";
 
 function Posts() {
 
@@ -55,7 +56,7 @@ function Posts() {
         <div className="max-w-[470px] mx-auto">
             {posts.map((post) => (
                 <Post key={post.id}
-                      id={post.id ?? ""}
+                      id={post.id}
                       username={post.username}
                       userImg={post.profileImg}
                       postImg={post.image}
@@ -65,6 +66,7 @@ function Posts() {
             ))}
             <PostUpdateModal/>
             <PostModal opened={dataForPostModal.opened} onClose={handleClose} postId={dataForPostModal.id}/>
+            <ReportModal/>
         </div>
     )
 }

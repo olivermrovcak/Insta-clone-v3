@@ -8,6 +8,7 @@ import ModalActionList from "./ModalActionList";
 import ModalCommentForm from "./ModalCommentForm";
 import ModalCaption from "./ModalCaption";
 import ModalHeader from "./ModalHeader";
+import {getPostById} from "../../../../firebase/apiCalls";
 
 interface Props {
     opened: boolean,
@@ -17,33 +18,19 @@ interface Props {
 
 export default function PostModal({opened, onClose, postId}: Props) {
 
-    const [comments, setComments] = useState<any>();
     const [post, setPost] = useState<any>();
 
-    async function getPost() {
-        const path = "posts";
-        const pathSegments = postId;
-        await getDocument({path, pathSegments}).then((res) => {
-            setPost(res?.data());
-        });
-        getComments();
-    }
-
-    async function getComments() {
-        const path = "posts";
-        const pathSegments = postId + "/comments";
-        const orderByField = "timeStamp";
-        const order = "asc";
-        await getDataFromDb({path, pathSegments, orderByField, order}).then((res) => {
-            setComments(res);
+    function getPost() {
+        getPostById(postId).then((response) => {
+            setPost(response.data)
+        }).catch((error) => {
+            console.error(error);
         });
     }
 
     useEffect(() => {
         getPost();
-        console.log(comments)
     }, [postId])
-
 
     return <Modal
         open={opened}
@@ -69,7 +56,7 @@ export default function PostModal({opened, onClose, postId}: Props) {
                     {/*CAPTION */}
                     <ModalCaption post={post}/>
                     {/*COmments*/}
-                    <PostModalComments comments={comments}/>
+                    <PostModalComments comments={post?.comments}/>
                 </div>
 
                 {/*Action list*/}
@@ -88,31 +75,23 @@ interface PostModalCommentProps {
 function PostModalComments({comments}: PostModalCommentProps) {
     return <>
         {comments ? (
-            comments.map((comment, id) => (
+            comments?.map((comment, id) => (
                 <div key={id} className="w-full flex flex-row mb-2">
                     <img
-                        src={comment?.data().userImage}
+                        src={comment?.userImage}
                         className="h-[32px] w-[32px] object-contain mr-2 rounded-full"
                     />
-
                     <div className="flex flex-col relative w-full justify-center items-start ">
-
-                        <p className="text-[14px] font-bold ">{comment?.data().username} {" "}
+                        <p className="text-[14px] font-bold ">{comment?.username} {" "}
                             <span className="font-normal">
-                 {comment?.data().comment}
+                 {comment?.comment}
                 </span>
                         </p>
-
-
                         <p className="text-[12px] text-[#8E8E8E]">
                             1t Páči sa mi to Odpovedať
                         </p>
-
                         <HeartIcon className="w-3 h-4 right-0 top-[10px] absolute"/>
-
                     </div>
-
-
                 </div>
             ))
         ) : (

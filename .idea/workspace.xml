@@ -4,76 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="added everything lol">
-      <change afterPath="$PROJECT_DIR$/.firebaserc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/INSTA.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cors.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions/apiCalls/verifyId.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions/serviceAccountKey.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/functions/threadsFunctions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Feed/FeedSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AttachmentRender.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadAddComment.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadComment.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadOverview.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsActionList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsComments.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsMain.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/reposts/Repost.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui-debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.a0db2188.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/main.a0db2188.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.495bbefa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.495bbefa.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.495bbefa.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="refactored threads">
+      <change afterPath="$PROJECT_DIR$/src/components/Feed/ReportModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atoms/modalAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms/modalAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account/PostsGrid.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account/PostsGrid.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Account/Stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account/Stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Feed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Feed.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostComments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostComments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalCommentForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalCommentForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostImg.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostImg.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Stories.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Stories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/DropdownHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/DropdownHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/ModalUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/ModalUpload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/SearchBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/SearchBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignIn/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignIn/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsFeed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsFeed.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/reposts/Repost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/reposts/Repost.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/firebase/apiCalls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/apiCalls.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase/functions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/functions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/types/Thread.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/types/Thread.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +187,10 @@
       <workItem from="1703691024468" duration="8664000" />
       <workItem from="1703764186256" duration="2681000" />
       <workItem from="1703853615179" duration="224000" />
-      <workItem from="1703866590204" duration="13550000" />
+      <workItem from="1703866590204" duration="13944000" />
+      <workItem from="1704029888794" duration="432000" />
+      <workItem from="1704133985577" duration="9281000" />
+      <workItem from="1705065349433" duration="4638000" />
     </task>
     <task id="LOCAL-00001" summary="add git ignore">
       <option name="closed" value="true" />
@@ -292,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701910081405</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="refactored threads">
+      <option name="closed" value="true" />
+      <created>1703881220690</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703881220690</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +310,7 @@
     <MESSAGE value="add git ignore" />
     <MESSAGE value="fix" />
     <MESSAGE value="added everything lol" />
-    <option name="LAST_COMMIT_MESSAGE" value="added everything lol" />
+    <MESSAGE value="refactored threads" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored threads" />
   </component>
 </project>

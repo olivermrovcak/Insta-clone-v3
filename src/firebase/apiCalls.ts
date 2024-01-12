@@ -41,6 +41,11 @@ export async function getAllPosts() {
     })
 }
 
+//getPost
+export async function getPostById(postId: string) {
+    return axios.post(devUrl + "/getPost", {postId});
+}
+
 export async function getFollowingThreads() {
     const idToken = await auth?.currentUser?.getIdToken(true);
     return axios.get( devUrl + "/getAllPosts", {

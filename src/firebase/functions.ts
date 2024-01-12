@@ -11,20 +11,6 @@ interface Props {
 async function getDataFromDb({path, pathSegments, orderByField, order}: Props): Promise<[]>;
 async function getDataFromDb({path, pathSegments}: Props): Promise<[]>;
 
-
-// posts: {
-//      id : {
-//          comments: {
-//                [obj],
-//                [obj]
-//          }
-//      }
-//
-// }
-
-//path example : "posts"
-//path segments example : "id/comments"
-
 async function getDataFromDb({path, pathSegments, orderByField, order}: Props) {
     const q = query(collection(
             db,
@@ -49,6 +35,5 @@ export async function getDocument({path, pathSegments}: Props) {
         return docSnap;
     }
 }
-
 
 export default getDataFromDb;
