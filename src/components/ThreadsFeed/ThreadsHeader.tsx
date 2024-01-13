@@ -7,13 +7,21 @@ import {
     MenuHandler,
     MenuList,
     MenuItem,
-    Button,
+    Button, Input,
 } from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
+import {useRecoilState} from "recoil";
+import {threadAddModal} from "../../atoms/modalAtom";
 
 function ThreadsMenu() {
 
+
     const navigate = useNavigate();
+    const [, setOpenModal] = useRecoilState(threadAddModal)
+
+    function handleOpenThreadModal() {
+        setOpenModal(true)
+    }
 
     return (
         <div className="px-24 bg-[#0f0f0f] bg-opacity-90 backdrop-blur-md p-4 flex flex-row justify-between w-full sticky top-0 !z-[100]">
@@ -37,8 +45,18 @@ function ThreadsMenu() {
             </div>
             <div className="invert flex flex-row w-fit space-x-5 ">
                 <HomeIcon className="h-8 w-8 cursor-pointer "/>
-                <MagnifyingGlassIcon className="h-8 w-8  cursor-pointer"/>
-                <ArrowUpOnSquareIcon className="h-8 w-8  cursor-pointer"/>
+                <ElipsisMenu handler={ <MagnifyingGlassIcon className="h-8 w-8  cursor-pointer"/>}>
+                    <MenuItem
+                        className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 flex flex-row justify-start items-center space-x-5"
+                        onResize={undefined} onResizeCapture={undefined}>
+                        <Input icon={<MagnifyingGlassIcon className="h-8 w-8"/>} onResize={undefined}
+                               onResizeCapture={undefined} crossOrigin={undefined} />
+                    </MenuItem>
+                    <MenuItem
+                        className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 text-red-600 !rounded-b-none last:!border-b-0 "
+                        onResize={undefined} onResizeCapture={undefined}>Vymazať</MenuItem>
+                </ElipsisMenu>
+                <ArrowUpOnSquareIcon onClick={handleOpenThreadModal} className="h-8 w-8  cursor-pointer"/>
                 <HeartIcon className="h-8 w-8  cursor-pointer"/>
                 <UserIcon className="h-8 w-8  cursor-pointer"/>
             </div>
@@ -61,3 +79,18 @@ function ThreadsMenu() {
 }
 
 export default ThreadsMenu
+
+function ElipsisMenu({handler, children}: any) {
+    return (
+        <Menu placement="bottom">
+            <MenuHandler>
+                {handler}
+            </MenuHandler>
+            <MenuList
+                className="!z-[101] w-72 rounded-xl p-0 bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold [&>*]:last:!border-b-0"
+                onResize={undefined} onResizeCapture={undefined}>
+                {children}
+            </MenuList>
+        </Menu>
+    )
+}

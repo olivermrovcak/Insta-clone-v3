@@ -63,7 +63,7 @@ export default function AddThreadModal({refresh}: props) {
     return (<Transition.Root show={open} as={Fragment}>
         <Dialog
             as="div"
-            className="fixed z-1000 inset-0 overflow-y-auto "
+            className="fixed !z-[1000] inset-0 overflow-y-auto "
             onClose={setOpen}
         >
             <div

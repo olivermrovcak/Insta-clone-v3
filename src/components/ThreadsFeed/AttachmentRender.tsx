@@ -8,7 +8,7 @@ export default function AttachmentRender({url}: any) {
         return <div className='relative !z-[1] rounded-xl overflow-y-hidden my-2'>
             <ReactPlayer
                 url={url}
-                className=' '
+                className=' !z-[0]'
                 width='100%'
                 height='100%'
                 controls // This prop is to display video controls like play, pause, etc.

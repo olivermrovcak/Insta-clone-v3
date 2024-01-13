@@ -18,6 +18,8 @@ import SouthIcon from "@mui/icons-material/South";
 import {Chip} from "@material-tailwind/react";
 import ColumnVisibilityHandler from "./ColumnVisibilityHandler";
 import {ErrorToast} from "../../utils/ToastUtils";
+import {getAuth} from "firebase/auth";
+import {app} from "../../firebase/firebase";
 
 enum FilterType {
     EQUAL = "==",
@@ -85,6 +87,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
     customOrder
                                                          }, ref) => {
 
+    const auth = getAuth(app as any);
     const [rowSelection, setRowSelection] = React.useState({});
     const [globalSort, setGlobalSort] = React.useState({
         col: customSort ?? "id",
@@ -92,67 +95,38 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
     })
     const [globalFilter, setGlobalFilter] = React.useState<any>(null);
     const tableContainerRef = React.useRef<HTMLDivElement>(null);
-    const [columnVisibility, setColumnVisibility] = useState(getColumnVisibilityFromLocalStorage());
 
-    function getColumnVisibilityFromLocalStorage() {
-        const visibility = localStorage.getItem(tableId);
-        if (visibility) {
-            return JSON.parse(visibility);
-        }
-        localStorage.setItem(tableId, JSON.stringify(defaultColumnVisibility));
-        return defaultColumnVisibility;
-    }
-
-    const {data, fetchNextPage, isFetching, refetch} = useInfiniteQuery<ApiResponse>({
+    const {data, refetch} = useInfiniteQuery<ApiResponse>({
         queryKey: [tableId, globalSort, globalFilter, columns],
-        initialPageParam: 0,
-        queryFn: ({pageParam}) => {
-            return fetchData(pageParam as number)
+        queryFn: () => {
+            return fetchData()
         },
-        getNextPageParam: (lastPage) => {
-            if (lastPage && lastPage.content.length > 0) {
-                return lastPage.pageable.pageNumber + 1; // Fetch the next page number
-            }
-            return null;
+        getNextPageParam: (lastPage, allPages) => {
+            // return the parameter for the next page based on the last page data
         },
         keepPreviousData: true,
-        refetchOnWindowFocus: false,
     })
 
     const flatData = React.useMemo(
-        () => data?.pages?.map(page => page?.content).flat() ?? [],
+        () => data?.pages?.map(page => page).flat() ?? [],
         [data]
     )
+
+    useEffect(() => {
+        console.log(flatData)
+    }, [data]);
 
     const totalDBRowCount = data?.pages?.[0]?.totalElements ?? 0
     const totalFetched = flatData?.length
 
-    const fetchMoreOnBottomReached = React.useCallback(
-        (containerRefElement?: HTMLDivElement | null) => {
-            if (containerRefElement) {
-                const {scrollHeight, scrollTop, clientHeight} = containerRefElement
-                if (
-                    scrollHeight - scrollTop - clientHeight < 300 &&
-                    !isFetching &&
-                    totalFetched < totalDBRowCount
-                ) {
-                    fetchNextPage()
-                }
-            }
-        },
-        [fetchNextPage, isFetching, totalFetched, totalDBRowCount]
-    )
-
-    async function fetchData(page: number) {
+    async function fetchData() {
         try {
+            const idToken = await auth?.currentUser?.getIdToken(true);
             const response = await axios.get(url, {
-                params: {
-                    page: page,
-                    size: 25,
-                    sort: globalSort.col + "," + globalSort.order,
-                    filter: getFilter(),
-                },
-            });;
+                headers: {
+                    'Authorization': idToken ?? "",
+                }
+            });
             return response.data;
         } catch (error) {
             console.error(error);
@@ -213,28 +187,14 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
             : [];
     }
 
-    useEffect(() => {
-        fetchMoreOnBottomReached(tableContainerRef.current)
-    }, [fetchMoreOnBottomReached])
-
-    useEffect(() => {
-        setColumnVisibility(getColumnVisibilityFromLocalStorage());
-    }, [defaultColumnVisibility]);
-
-    useEffect(() => {
-        localStorage.setItem(tableId, JSON.stringify(columnVisibility));
-    }, [columnVisibility]);
-
     const table = useReactTable({
         data: flatData,
         columns,
         state: {
-            columnVisibility,
             rowSelection
         },
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
         autoResetPageIndex: false,
     });
@@ -273,7 +233,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
             <section className="table-section">
                 <div
                     className="table-wrapper custom-scrollbar"
-                    onScroll={e => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
+                   // onScroll={e => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
                     ref={tableContainerRef}
                 >
                     <MuiTable
@@ -344,14 +304,6 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
                     {totalDBRowCount === totalFetched ? (
                         <p className="py-1 px-7 text-gray-500 text-sm">Zobrazené všetky záznamy</p>
                     ) : null}
-                </div>
-                <div className="flex flex-row justify-between mb-2 py-2 px-4 ">
-                    <Chip variant="outlined" value={`Počet všetkých záznamov v tabuľke: ${totalDBRowCount}`}
-                          className="border-gray-500 w-fit    dark:text-white"/>
-                    <ColumnVisibilityHandler
-                        columnVisibilityProp={columnVisibility}
-                        setColumnVisibilityProp={setColumnVisibility}
-                        columns={table.getAllLeafColumns()}/>
                 </div>
             </section>
         </>
