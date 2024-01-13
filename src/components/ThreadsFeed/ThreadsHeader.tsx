@@ -47,11 +47,12 @@ function ThreadsMenu() {
                     <Bars2Icon className="h-8 w-8 invert  cursor-pointer"/>
                 </MenuHandler>
                 <MenuList
-                    className="!z-[101] bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold "
+                    className="!z-[101] rounded-xl p-0 bg-[#0f0f0f]
+                    border-gray-500 border border-opacity-20 text-white font-bold "
                      onResize={undefined} onResizeCapture={undefined}>
-                    <MenuItem onClick={ () => navigate("/posts/following")} className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
+                    <MenuItem onClick={ () => navigate("/posts/following")} className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none "
                               onResize={undefined} onResizeCapture={undefined}>Spat na Instagram</MenuItem>
-                    <MenuItem className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
+                    <MenuItem className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
                               onResize={undefined} onResizeCapture={undefined}>Odhlásiť sa</MenuItem>
                 </MenuList>
             </Menu>

@@ -18,7 +18,7 @@ export default function ThreadsActionList({threadId, openThread}: Props) {
         hasLiked(threadId).then((response) => {
             setLiked(response?.data?.hasLiked)
         }).catch((error) => {
-            console.error(error)
+            console.error(error + threadId)
         })
     }
 
@@ -28,7 +28,6 @@ export default function ThreadsActionList({threadId, openThread}: Props) {
             return
         }
         likeThread(threadId).then((response) => {
-            console.log(response)
             setLiked(true)
         }).catch((error) => {
             console.error(error)

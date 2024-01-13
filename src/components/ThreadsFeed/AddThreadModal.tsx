@@ -6,10 +6,14 @@ import {getAuth} from "firebase/auth";
 import {app} from '../../firebase/firebase';
 import {CheckBadgeIcon} from "@heroicons/react/24/solid";
 import {PaperClipIcon} from "@heroicons/react/24/outline";
-import {serverTimestamp} from "firebase/firestore";
-import {uploadPost, uploadThread} from "../../firebase/apiCalls";
+import { uploadThread} from "../../firebase/apiCalls";
+import {ErrorToast, SuccessToast} from "../../utils/ToastUtils";
 
-export default function AddThreadModal() {
+interface props {
+    refresh?: () => void
+}
+
+export default function AddThreadModal({refresh}: props) {
     const auth = getAuth(app as any);
     const [open, setOpen] = useRecoilState(threadAddModal);
     const filePickerRef = useRef(null);
@@ -29,9 +33,12 @@ export default function AddThreadModal() {
         }
 
         await uploadThread(thread).then((response) => {
-            console.log(response)
+            SuccessToast("Thread pridaný");
+            handleRefresh();
+            setOpen(false)
         }).catch((error) => {
             console.error(error)
+            ErrorToast("Thread sa nepodarilo pridať");
         })
 
 
@@ -45,6 +52,12 @@ export default function AddThreadModal() {
         reader.onload = () => {
             setSelectedFile(reader.result);
         };
+    }
+
+    function handleRefresh() {
+        if (refresh) {
+            refresh();
+        }
     }
 
     return (<Transition.Root show={open} as={Fragment}>

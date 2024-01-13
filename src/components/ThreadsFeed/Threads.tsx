@@ -41,29 +41,32 @@ function Threads() {
                     return (
                         <Thread
                             id={thread?.id}
-                            key={thread?.uid}
+                            key={thread?.uid + thread?.id}
                             uid={thread?.uid}
                             text={thread?.text}
                             userName={thread?.userName}
                             timeStamp={thread?.timeStamp}
                             attachment={thread?.attachment}
                             user={thread?.user}
+                            isRepost={false}
+                            refresh={getThreads}
                         />
                     )
                 } else {
                     return (
                         <Repost
-                            key={thread?.uid}
+                            key={thread?.uid + thread?.id}
                             uid={thread?.uid}
                             timestamp={thread?.timeStamp}
                             threadId={thread?.threadId}
                             user={thread?.user}
                             thread={thread?.thread}
+                            id={thread?.id}
                         />
                     )
                 }
             })}
-            <AddThreadModal/>
+            <AddThreadModal refresh={getThreads}/>
         </div>
     )
 }

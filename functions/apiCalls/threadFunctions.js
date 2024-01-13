@@ -387,3 +387,70 @@ module.exports.repostThread = functions.https.onRequest(async (request, response
     });
 });
 
+module.exports.deleteRepostedThread = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+        try {
+            await verifyIdToken(request, response, async () => {
+                const { repostId } = request.body;
+
+                if (!repostId) {
+                    return response.status(400).send('Missing repost ID');
+                }
+
+                const repostRef = admin.firestore().collection('repostedThreads').doc(repostId);
+                const repostSnapshot = await repostRef.get();
+
+                if (!repostSnapshot.exists) {
+                    return response.status(404).send('Reposted thread not found');
+                }
+
+                // Delete the reposted thread document from Firestore
+                await repostRef.delete();
+
+                return response.status(200).send('Reposted thread deleted successfully');
+            });
+        } catch (error) {
+            console.error('Error deleting reposted thread', error);
+            return response.status(500).send('Internal Server Error');
+        }
+    });
+});
+
+module.exports.deleteThread = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+        try {
+            await verifyIdToken(request, response, async () => {
+                const { threadId } = request.body;
+
+                if (!threadId) {
+                    return response.status(400).send('Missing thread ID');
+                }
+
+                const threadRef = admin.firestore().collection('threads').doc(threadId);
+                const threadSnapshot = await threadRef.get();
+
+                if (!threadSnapshot.exists) {
+                    return response.status(404).send('Thread not found');
+                }
+
+                const threadData = threadSnapshot.data();
+
+                // If the thread has an attachment, delete it from the storage bucket
+                if (threadData.attachment) {
+                    const bucket = admin.storage().bucket('gs://oliverminstaclone.appspot.com');
+                    const filePath = threadData.attachment.split('oliverminstaclone.appspot.com/')[1];
+                    await bucket.file(filePath).delete();
+                }
+
+                // Delete the thread document from Firestore
+                await threadRef.delete();
+
+                return response.status(200).send('Thread deleted successfully');
+            });
+        } catch (error) {
+            console.error('Error deleting thread', error);
+            return response.status(500).send('Internal Server Error');
+        }
+    });
+});
+

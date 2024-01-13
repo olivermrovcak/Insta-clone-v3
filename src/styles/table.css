@@ -1,0 +1,65 @@
+@tailwind components;
+
+@layer components {
+    .table-section {
+        @apply flex flex-col w-full h-[90%] relative overflow-hidden shadow-lg rounded-md dark:bg-[#1e2a37] bg-transparent
+    }
+
+    .table-wrapper {
+        @apply block  overflow-x-scroll h-[100%] w-full
+        overflow-y-scroll bg-[#fff] border rounded-md dark:bg-[#1e2a37] dark:!border-ssk-dark-border
+    }
+
+    .table-header-td {
+        @apply flex flex-row justify-start items-center relative  font-bold
+    }
+
+    .table-header-th {
+        @apply !text-left whitespace-nowrap p-[16px] !py-4 relative text-sm font-bold text-[#667085] dark:!text-gray-500
+    }
+
+    .table-header-th > div {
+        @apply !min-w-0 relative
+    }
+
+    .table-header {
+        @apply cursor-default relative flex flex-row p-[15px] w-full items-center
+    }
+
+    .table-header .header-wrapper {
+        @apply flex flex-row items-center
+    }
+
+    .table-header h3 {
+        @apply cursor-pointer   mr-2
+    }
+
+    .table-header .filter-sort-div {
+        @apply w-[30px] h-[32px] relative flex flex-row items-center
+    }
+
+    .table-header .filter-icon {
+        @apply group-hover:!block cursor-pointer
+    }
+
+    .table-header .sort-icon {
+        @apply w-5 h-5 transition-all cursor-pointer hidden object-contain
+    }
+
+    .table-header .filter-dropdown h1 {
+        @apply mb-10
+    }
+
+    .table-header .filter-dropdown .xicon {
+        @apply absolute cursor-pointer w-6 h-6 right-5 top-5
+    }
+    .input {
+        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:!border-blue-500 block  p-2.5
+    }
+    .select-col {
+       @apply max-w-[50px]
+    }
+}
+
+
+

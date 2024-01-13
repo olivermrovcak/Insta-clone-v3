@@ -4,29 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="refactored threads">
-      <change afterPath="$PROJECT_DIR$/src/components/Feed/ReportModal.tsx" afterDir="false" />
+    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="moved getting thread data from frontend to cloud function, same with user for thread and repost">
+      <change afterPath="$PROJECT_DIR$/src/atoms/appStateAtom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Admin/AdminPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/ColumnVisibilityHandler.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/Table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/TableFilter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/TableUtils.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/VirtualScroll.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/table.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/ToastUtils.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atoms/modalAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms/modalAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostImg.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostImg.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostComments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostComments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Feed/Stories.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Stories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Nav/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsActionList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/reposts/Repost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/reposts/Repost.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/firebase/apiCalls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/apiCalls.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/functions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/functions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/types/Thread.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/types/Thread.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,26 +74,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/src/utils&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "last_opened_file_path": "/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/src/styles",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "ts.external.directory.path": "/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/styles" />
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -190,7 +199,10 @@
       <workItem from="1703866590204" duration="13944000" />
       <workItem from="1704029888794" duration="432000" />
       <workItem from="1704133985577" duration="9281000" />
-      <workItem from="1705065349433" duration="4638000" />
+      <workItem from="1705065349433" duration="10875000" />
+      <workItem from="1705143118486" duration="5633000" />
+      <workItem from="1705179845477" duration="176000" />
+      <workItem from="1705180039281" duration="1959000" />
     </task>
     <task id="LOCAL-00001" summary="add git ignore">
       <option name="closed" value="true" />
@@ -256,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703881220690</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="moved getting thread data from frontend to cloud function, same with user for thread and repost">
+      <option name="closed" value="true" />
+      <created>1705070695957</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1705070695957</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +331,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="added everything lol" />
     <MESSAGE value="refactored threads" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored threads" />
+    <MESSAGE value="moved getting thread data from frontend to cloud function, same with user for thread and repost" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved getting thread data from frontend to cloud function, same with user for thread and repost" />
   </component>
 </project>

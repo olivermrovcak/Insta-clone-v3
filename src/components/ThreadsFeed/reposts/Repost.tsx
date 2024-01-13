@@ -1,18 +1,17 @@
-import React, {useEffect} from 'react'
-import {getUserByUid} from "../../../firebase/apiCalls";
-import {getThreadById} from "../../../firebase/apiCalls";
+import React from 'react'
 import Thread from "../Thread";
 import {ArrowPathRoundedSquareIcon} from "@heroicons/react/24/outline";
 
 interface props {
+    id: string,
     uid: string,
     timestamp: string,
     threadId: string,
-    user: any
-    thread: any
+    user: any,
+    thread: any,
 }
 
-export default function Repost({uid, timestamp, threadId, user, thread}: props) {
+export default function Repost({user, thread, threadId, id}: props) {
 
     return (
         <div>
@@ -20,18 +19,19 @@ export default function Repost({uid, timestamp, threadId, user, thread}: props) 
                 <ArrowPathRoundedSquareIcon className="h-6"/>
                 <p className="font-bold text-sm">Reposted by {user?.name}</p>
             </div>
-            {user &&
+            {(user && thread) &&
                 <Thread
                     text={thread?.text}
                     uid={thread?.uid}
                     attachment={thread?.attachment}
-                    id={thread?.id}
+                    id={threadId}
                     userName={thread?.userName}
                     user={user}
+                    isRepost={true}
+                    repostId={id}
                 />
             }
         </div>
-
     )
 }
 

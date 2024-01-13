@@ -23,6 +23,17 @@ export async function getUserByUid(uid: string) {
     })
 }
 
+export async function isUserAdmin(uid: string) {
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/isUserAdmin", {
+        uid: uid
+    }, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    })
+}
+
 export async function getFollowingPosts() {
     const idToken = await auth?.currentUser?.getIdToken(true);
     return axios.get(devUrl + "/getAllPostsFollowing", {
@@ -48,7 +59,7 @@ export async function getPostById(postId: string) {
 
 export async function getFollowingThreads() {
     const idToken = await auth?.currentUser?.getIdToken(true);
-    return axios.get( devUrl + "/getAllPosts", {
+    return axios.get(devUrl + "/getAllPosts", {
         headers: {
             'Authorization': idToken ?? "",
         }
@@ -63,7 +74,7 @@ export async function uploadPost({uid, username, caption, profileImg, fileToUplo
         profileImg: profileImg,
         selectedFile: fileToUpload, // This should be a base64-encoded string
     };
-    return axios.post(devUrl +  "/uploadPost", data);
+    return axios.post(devUrl + "/uploadPost", data);
 };
 
 export async function updatePost(postId: string, caption: string) {
@@ -79,7 +90,7 @@ export async function deletePost(postId: string) {
     try {
         const response = await axios({
             method: 'delete',
-            url: devUrl +  '/deletePost',
+            url: devUrl + '/deletePost',
             data: {
                 postId: postId
             }
@@ -93,7 +104,7 @@ export async function deletePost(postId: string) {
 
 export async function getAllThreads() {
     const idToken = await auth?.currentUser?.getIdToken(true);
-    return axios.get(devUrl +  "/getAllThreadsFollowing", {
+    return axios.get(devUrl + "/getAllThreadsFollowing", {
         headers: {
             'Authorization': idToken ?? "",
         }
@@ -104,7 +115,7 @@ export async function getThreadById(threadId: string) {
     const data = {
         threadId: threadId,
     };
-    return axios.post(devUrl +  "/getThreadById", data);
+    return axios.post(devUrl + "/getThreadById", data);
 }
 
 export async function addCommentToThread(threadId: string, comment: string) {
@@ -113,7 +124,7 @@ export async function addCommentToThread(threadId: string, comment: string) {
         comment: comment,
         uid: auth.currentUser?.uid,
     };
-    return axios.post(devUrl +  "/addCommentToThread", data);
+    return axios.post(devUrl + "/addCommentToThread", data);
 }
 
 export async function uploadThread({uid, text, attachment}: Thread) {
@@ -122,7 +133,19 @@ export async function uploadThread({uid, text, attachment}: Thread) {
         text: text,
         attachment: attachment,
     };
-    return axios.post(devUrl +  "/uploadThread", data);
+    return axios.post(devUrl + "/uploadThread", data);
+}
+
+export async function deleteThread(threadId) {
+    const data = {
+        threadId: threadId,
+    };
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/deleteThread", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
 }
 
 export async function likeThread(threadId: string) {
@@ -130,7 +153,7 @@ export async function likeThread(threadId: string) {
         threadId: threadId,
         uid: auth.currentUser?.uid,
     };
-    return axios.post(devUrl +  "/likeThread", data);
+    return axios.post(devUrl + "/likeThread", data);
 }
 
 export async function unlikeThread(threadId: string) {
@@ -138,7 +161,7 @@ export async function unlikeThread(threadId: string) {
         threadId: threadId,
         uid: auth.currentUser?.uid,
     };
-    return axios.post(devUrl +  "/unlikeThread", data);
+    return axios.post(devUrl + "/unlikeThread", data);
 }
 
 export async function hasLiked(threadId: string) {
@@ -147,7 +170,7 @@ export async function hasLiked(threadId: string) {
         uid: auth.currentUser?.uid,
     };
 
-    return axios.post(devUrl +  "/hasUserLikedThread", data);
+    return axios.post(devUrl + "/hasUserLikedThread", data);
 }
 
 export async function repostThread(threadId: string) {
@@ -155,7 +178,19 @@ export async function repostThread(threadId: string) {
         threadId: threadId,
         uid: auth.currentUser?.uid,
     };
-    return axios.post(devUrl +  "/repostThread", data);
+    return axios.post(devUrl + "/repostThread", data);
+}
+
+export async function deleteRepostedThread(repostId: string) {
+    const data = {
+        repostId: repostId,
+    };
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/deleteRepostedThread", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
 }
 
 export async function getDataFromFirebase(path: string) {

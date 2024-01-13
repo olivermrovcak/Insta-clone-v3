@@ -92,7 +92,6 @@ interface CommentsProps {
 function Comments({comments, setData}: CommentsProps) {
 
     return <div>
-
         {comments?.length > 1 ? (
             <>
                 <div key={comments[0]?.id} className='flex items-center mt-1 space-x-2 mb-1'>
@@ -104,10 +103,7 @@ function Comments({comments, setData}: CommentsProps) {
                 <p onClick={setData} className="text-gray-300 text-[14px] cursor-pointer">Zobrazit všetky
                     komentare({comments?.length})</p>
             </>
-
         ) : (
-
-
             comments?.map((comment: any) => (
                 <div key={comment.data().id} className='flex items-center mt-1 space-x-2 mb-3'>
                     <p className='text-sm flex-1 '>
@@ -115,10 +111,7 @@ function Comments({comments, setData}: CommentsProps) {
                     </p>
                 </div>
             ))
-
         )}
-
-
     </div>
 }
 

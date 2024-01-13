@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    PaperAirplaneIcon, MagnifyingGlassIcon, AtSymbolIcon
+    PaperAirplaneIcon, MagnifyingGlassIcon, AtSymbolIcon, WrenchIcon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -11,9 +11,11 @@ import MenuItem from "./MenuItem";
 import {FilmIcon, PlusCircleIcon, StopIcon} from "@heroicons/react/24/solid";
 import {modalStateAdd} from "../../atoms/modalAtom";
 import logo from "../../images/instagram.png"
+import {appState as appStateAtom} from "../../atoms/appStateAtom";
 
 function Header() {
 
+    const [appState, setAppState] = useRecoilState(appStateAtom);
     const [, setOpen] = useRecoilState(modalStateAdd);
     const handleOpen = () => setOpen(true);
 
@@ -28,6 +30,9 @@ function Header() {
         </div>
         {/* NAV */}
         <ul className="flex flex-col text-white w-full  text-[16px] [&>*]:p-[14px]  ">
+            {appState.isUserAdmin && (
+                <MenuItem text={"Admin"} icon={<WrenchIcon className="w-[26px]"/>} link={"/admin"}/>
+            )}
             <MenuItem text={"Domov"} icon={<HomeIcon className="w-[26px]"/>} link={"/posts/following"}/>
             <MenuItem text={"Hľadať"} icon={<MagnifyingGlassIcon className="w-[26px]"/>} link={"/"}/>
             <MenuItem text={"Preskúmať"} icon={<StopIcon className="w-[26px]"/>} link={"/"}/>
