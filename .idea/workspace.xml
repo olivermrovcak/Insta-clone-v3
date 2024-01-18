@@ -4,44 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="refactored the table for app use">
-      <change afterPath="$PROJECT_DIR$/src/components/Nav/SearchBar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ElipsisMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/firebase/report.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/menu-fade.css" afterDir="false" />
+    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="added searching">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/threadFunctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atoms/modalAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms/modalAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Feed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Feed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Nav/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/MiniProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/MiniProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav/SearchBar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SideBar/Suggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/Suggestions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/ColumnVisibilityHandler.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/TableFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/TableFilter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Table/TableUtils.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/TableUtils.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThread.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Thread.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadAddComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadAddComment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadComment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadOverview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadOverview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/Threads.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsActionList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsComments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsComments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsFeed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsFeed.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsMain.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadsMain.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/apiCalls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/apiCalls.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Nav/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/SearchBar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +181,7 @@
       <workItem from="1705238672245" duration="5590000" />
       <workItem from="1705252354751" duration="14531000" />
       <workItem from="1705315712667" duration="18849000" />
-      <workItem from="1705578484355" duration="8040000" />
+      <workItem from="1705578484355" duration="8444000" />
     </task>
     <task id="LOCAL-00001" summary="add git ignore">
       <option name="closed" value="true" />
@@ -305,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705185219624</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="added searching">
+      <option name="closed" value="true" />
+      <created>1705587383348</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705587383348</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,6 +337,7 @@
     <MESSAGE value="moved getting thread data from frontend to cloud function, same with user for thread and repost" />
     <MESSAGE value="added tanstack-table and query from recent projects" />
     <MESSAGE value="refactored the table for app use" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored the table for app use" />
+    <MESSAGE value="added searching" />
+    <option name="LAST_COMMIT_MESSAGE" value="added searching" />
   </component>
 </project>

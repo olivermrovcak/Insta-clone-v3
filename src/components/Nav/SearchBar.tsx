@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 
 function SearchBar() {
 
-    const [isSearchBarOpened,] = useRecoilState(searchBarOpened);
+    const [isSearchBarOpened,setIsSearchBarOpened] = useRecoilState(searchBarOpened);
     const [users, setUsers] = React.useState([])
     const [search, setSearch] = React.useState("")
 
@@ -39,6 +39,7 @@ function SearchBar() {
         getUsersByUsername(search)
         return () => {
             setUsers([])
+            setIsSearchBarOpened(false)
         }
     }, [search]);
 

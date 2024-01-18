@@ -53,7 +53,7 @@ function Header() {
         {/* NAV */}
         <ul className="flex flex-col text-white w-full  text-[16px] [&>*]:p-[14px] break-keep ">
             {appState.isUserAdmin && (
-                <MenuItem text={"Admin"} icon={<WrenchIcon className="w-[26px]"/>} link={"/admin"}/>
+                <MenuItem onClick={() => setIsSearchBarOpened(false)} text={"Admin"} icon={<WrenchIcon className="w-[26px]"/>} link={"/admin"}/>
             )}
             <MenuItem text={"Domov"} icon={<HomeIcon className="w-[26px]"/>} link={"/posts/following"}/>
             <MenuItem onClick={() => handleSearchBarOpen()} text={"Hľadať"}
