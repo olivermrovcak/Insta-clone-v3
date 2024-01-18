@@ -52,4 +52,8 @@ export const reportModal = atom({
     },
 })
 
+export const searchBarOpened = atom({
+    key: 'searchBarOpened', default: false,
+})
+
 

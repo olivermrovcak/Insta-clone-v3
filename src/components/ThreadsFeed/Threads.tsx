@@ -4,7 +4,7 @@ import {Thread as ThreadType} from "../../utils/types/Thread";
 import Thread from "./Thread";
 import AddThread from "./AddThread";
 import {useRecoilState} from "recoil";
-import {loadingState} from "../../atoms/modalAtom";
+import {loadingState, threadOverview} from "../../atoms/modalAtom";
 import AddThreadModal from "./AddThreadModal";
 import Repost from "./reposts/Repost";
 
@@ -12,6 +12,7 @@ function Threads() {
 
     const [threads, setThreads] = useState<any>([]);
     const [, setIsLoading] = useRecoilState(loadingState)
+    const [openedThread, setOpenedThread] = useRecoilState(threadOverview);
 
     async function getThreads() {
         try {
@@ -34,7 +35,7 @@ function Threads() {
     }, []);
 
     return (
-        <div className="max-w-[470px] my-7 space-y-5">
+        <div className="max-w-[470px] my-7 p-2 sm:p-0 space-y-5">
             <AddThread/>
             {threads?.map((thread) => {
                 if (thread.text) {

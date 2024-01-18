@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -20,7 +20,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "outDir": "build/webapp/static",
-    "memoryLimit": 5000,
+    "noImplicitAny": false,
+    "strictNullChecks": false
   },
   "include": [
     "src",

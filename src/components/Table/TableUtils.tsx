@@ -32,19 +32,17 @@ const getCellAsDateTime = (info: CellContext<any, any>) => getCell(getFormattedD
 
 type getCellFunction = (info: CellContext<any, any>) => JSX.Element;
 
-const getColumn = (columnHelper: ColumnHelper<any>, accesor: string, title: string, getCellFnc: getCellFunction, customSize?: number, isNumeric: boolean = false ) => {
+const getColumn = (columnHelper: ColumnHelper<any>, accesor: string, title: string, getCellFnc: getCellFunction, customSize?: number) => {
     return columnHelper.accessor(accesor, {
         id: accesor,
         header: (col) => getHeader(col, title),
         cell: (info) => getCellFnc(info),
         size: customSize ? customSize : 160,
-        label: title,
-        isNumeric: isNumeric,
     });
 }
 
 export const columnAsText = (columnHelper: ColumnHelper<any>, accesor: string, title: string, isNumeric?: boolean, customSize?: number) => {
-    return getColumn(columnHelper, accesor, title, getCellAsText, customSize, isNumeric);
+    return getColumn(columnHelper, accesor, title, getCellAsText, customSize);
 }
 
 export const columnAsDate = (columnHelper: ColumnHelper<any>, accesor: string, title: string, customSize?: number) => {
@@ -52,7 +50,7 @@ export const columnAsDate = (columnHelper: ColumnHelper<any>, accesor: string, t
 }
 
 export const columnAsDateTime = (columnHelper: ColumnHelper<any>, accesor: string, title: string, isNumeric?: boolean, customSize?: number) => {
-    return getColumn(columnHelper, accesor, title, getCellAsDateTime, customSize, isNumeric);
+    return getColumn(columnHelper, accesor, title, getCellAsDateTime, customSize);
 }
 
 export const getSelectColumn = () => {

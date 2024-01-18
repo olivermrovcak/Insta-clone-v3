@@ -1,57 +1,78 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import {getAuth} from "firebase/auth";
 import {app} from "../../firebase/firebase";
 import {GifIcon, PhotoIcon, FaceSmileIcon} from "@heroicons/react/24/outline";
 import {addCommentToThread} from "../../firebase/apiCalls";
 import {useNavigate} from "react-router-dom";
+import {CheckBadgeIcon, EllipsisHorizontalIcon} from "@heroicons/react/24/solid";
+import {MenuItem} from "@material-tailwind/react";
+import ElipsisMenu from "./ElipsisMenu";
+import {useRecoilState} from "recoil";
+import {loadingState} from "../../atoms/modalAtom";
+import {ErrorToast} from "../../utils/ToastUtils";
 
 interface props {
     threadId: string
+    refresh: () => void
 }
 
-function ThreadAddComment({threadId}: props) {
+function ThreadAddComment({threadId, refresh}: props) {
 
     const auth = getAuth(app as any);
-    const [text, setText] = React.useState<string>("");
     const navigate = useNavigate();
+    const textRef = useRef(null);
+    const [isLoading,setIsLoading] = useRecoilState(loadingState)
 
     function handleUploadComment() {
-        if (text === "") {
-            return;
-        }
-        addCommentToThread(threadId, text).then((response) => {
-            console.log(response)
+        if (isLoading || textRef.current.innerText === "" || textRef.current.innerText.length > 300) {
+            ErrorToast("Komentár nesmie byť dlhší než 300 znakov");
+        };
+        setIsLoading(true);
+
+        addCommentToThread(threadId, textRef.current.innerText).then((response) => {
+            refresh();
+            textRef.current.innerText = "";
         }).catch((error) => {
             console.error(error)
+        }).finally(() => {
+            setIsLoading(false);
         });
     }
 
     return (
-        <div className="w-full border-[1px] border-t-0 border-gray-500 p-5 flex flex-col">
-            <div className="w-full flex flex-row items-start ">
-                <img className="rounded-full h-[32px] w-[32px] object-contain  mr-3"
-                     src={auth?.currentUser?.photoURL as string} alt=""/>
-                <div className="w-full overflow-x-hidden">
-                        <textarea
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            className="bg-transparent block resize-none p-0 w-full text-2xl overflow-x-hidden break-words outline-none border-none
-                            focus:ring-0 focus:outline-none focus:border-none  text-white"
-                            placeholder={`What do u think, ${auth?.currentUser?.displayName?.split(" ")[0]}?`}
-                        >
-                        </textarea>
-                </div>
-            </div>
-            <div className="w-full text-blue-500 flex flex-row items-center">
-                <div className="w-fit space-x-3 flex-1 flex flex-row" >
-                    <GifIcon className="h-6 cursor-pointer"/>
-                    <PhotoIcon className="h-6 cursor-pointer"/>
-                    <FaceSmileIcon className="h-6 cursor-pointer"/>
-                </div>
-                <button onClick={handleUploadComment} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl ">
-                    REPLY
-                </button>
-            </div>
+        <div
+            className="w-full  flex flex-col ">
+                    <div
+                        className="text-white cursor-pointer transition-all
+             border-b  border-b-gray-200 border-opacity-20  flex flex-row w-full py-2">
+                        <div className="min-h-full flex flex-col items-center !w-16 ">
+                            <img className="rounded-full h-[32px] w-[32px] object-contain" src={auth.currentUser.photoURL} alt=""/>
+                            <div className="w-[1px]  border-r-2 border-r-gray-400 border-opacity-30 my-2 min-h-[20px] h-full"></div>
+                            <div className="relative ">
+                                <img className="rounded-full h-4 absolute left-[65%] bottom-0 ring-2 ring-[#0f0f0f]"
+                                     src={auth.currentUser.photoURL} alt=""/>
+                                <img className="rounded-full h-4 absolute left-[65%] bottom-0 ring-2 ring-[#0f0f0f]"
+                                     src={auth.currentUser.photoURL} alt=""/>
+                            </div>
+                        </div>
+                        <div className="w-full pl-3 min-h-[100px] h-[100%] flex flex-col items-start justify-start space-y-2">
+                            <div className="flex flex-row items-center w-full">
+                                <p className="font-bold text-[14px]">{auth.currentUser.displayName}</p>
+                                <CheckBadgeIcon className="h-5 text-blue-500 mx-2 mr-auto"/>
+                            </div>
+                            <p className="text-sm text-white sm:max-w-[380px] max-w-[300px]
+                               cursor-text focus:right-0 focus:border-0 text-left focus:outline-0 editableContent"
+                               data-placeholder="Začnite vlákno..."
+                               tabIndex={-1}
+                               contentEditable={true}
+                               ref={textRef}
+                            >
+                            </p>
+                            <button onClick={() => handleUploadComment()} className="bg-white ml-auto hover:bg-gray-200 text-black font-bold text-[14px] px-4  py-1 rounded-xl ">
+                                Uverejniť
+                            </button>
+                        </div>
+                    </div>
         </div>
     )
 }

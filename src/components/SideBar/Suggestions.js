@@ -38,7 +38,7 @@ function Suggestions() {
             <h3 className='font-semibold text-gray-400 text-[14px]'>Návrhy pre vás</h3>
             <button className='cursor-pointer text-white font-semibold text-[12px]'> Zobraziť všetky</button>
         </div>
-        {allUsers.map((profile,index) =>{
+        {allUsers?.map((profile,index) =>{
             return index < 5 ?
              <div key={index} className='flex items-center mt-3 justify-between text-white '>
                         <img className='w-10 h-10 rounded-full ' src={profile.photoUrl} alt="" />

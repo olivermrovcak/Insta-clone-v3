@@ -1,12 +1,14 @@
 import React from 'react';
 import {getAuth, signOut} from "firebase/auth";
 import {app} from '../../firebase/firebase';
+import {useNavigate} from "react-router-dom";
 
 function MiniProfile() {
     const auth = getAuth(app);
+    const navigate = useNavigate();
     const signOutGoogle = () => {
         signOut(auth).then(() => {
-            // Sign-out successful.
+            navigate("/");
         }).catch((error) => {
             // An error happened.
         });

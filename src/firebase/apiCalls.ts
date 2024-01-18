@@ -115,7 +115,12 @@ export async function getThreadById(threadId: string) {
     const data = {
         threadId: threadId,
     };
-    return axios.post(devUrl + "/getThreadById", data);
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/getThreadById", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
 }
 
 export async function addCommentToThread(threadId: string, comment: string) {
@@ -127,13 +132,45 @@ export async function addCommentToThread(threadId: string, comment: string) {
     return axios.post(devUrl + "/addCommentToThread", data);
 }
 
+export async function deleteCommentFromThread(threadId: string, commentId: string) {
+    const data = {
+        threadId: threadId,
+        commentId: commentId,
+    };
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/deleteCommentFromThread", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
+}
+
+export async function updateCommentInThread(threadId: string, commentId: string, newText: string) {
+    const data = {
+        threadId: threadId,
+        commentId: commentId,
+        newText: newText,
+    };
+    const idToken = await auth?.currentUser?.getIdToken(true);
+    return axios.post(devUrl + "/updateCommentInThread", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
+}
+
 export async function uploadThread({uid, text, attachment}: Thread) {
+    const idToken = await auth?.currentUser?.getIdToken(true);
     const data = {
         uid: uid,
         text: text,
         attachment: attachment,
     };
-    return axios.post(devUrl + "/uploadThread", data);
+    return axios.post(devUrl + "/uploadThread", data, {
+        headers: {
+            'Authorization': idToken ?? "",
+        }
+    });
 }
 
 export async function deleteThread(threadId) {

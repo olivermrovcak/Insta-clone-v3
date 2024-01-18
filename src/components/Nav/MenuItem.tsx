@@ -1,6 +1,8 @@
 import React, {ReactNode} from "react";
 import {Link} from "react-router-dom";
 import '../../index.css';
+import {useRecoilState} from "recoil";
+import {searchBarOpened} from "../../atoms/modalAtom";
 
 interface MenuProps {
     text: string
@@ -10,6 +12,9 @@ interface MenuProps {
 }
 
 export default function MenuItem({text, icon, link, onClick}: MenuProps) {
+
+    const [isSearchBarOpened, setIsSearchBarOpened] = useRecoilState(searchBarOpened);
+
     return (
         <Link to={link} onClick={onClick}
               className="rounded-full hover:bg-gray-50 hover:bg-opacity-[6%] transition-all group">
@@ -18,7 +23,7 @@ export default function MenuItem({text, icon, link, onClick}: MenuProps) {
                     {icon}
                 </div>
 
-                <p className="pl-3 hidden sm:block">{text}</p>
+                {!isSearchBarOpened && <p className="pl-3 hidden md:block  ">{text}</p>}
             </li>
         </Link>
 

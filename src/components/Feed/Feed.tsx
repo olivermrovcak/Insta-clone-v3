@@ -5,7 +5,6 @@ import MiniProfile from '../Nav/MiniProfile';
 import Suggestions from '../SideBar/Suggestions';
 import SidebarInfo from "../SideBar/SidebarInfo";
 import FeedSelector from "./FeedSelector";
-import {useNavigate} from "react-router-dom";
 
 function Feed() {
 

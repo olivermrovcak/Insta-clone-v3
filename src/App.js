@@ -1,10 +1,10 @@
-import {Routes, Route, BrowserRouter} from "react-router-dom";
+import {Routes, Route, BrowserRouter, useNavigate} from "react-router-dom";
 import './index.css';
 import React, {useState, useEffect} from "react";
 import SignIn from "./components/SignIn/SignIn";
 import Main from "./components/Main";
 import AccountPage from "./components/Account/AccountPage";
-import {app} from "./firebase/firebase";
+import {app, db} from "./firebase/firebase";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import Feed from "./components/Feed/Feed";
 import ThreadOverview from "./components/ThreadsFeed/ThreadOverview";
@@ -15,6 +15,7 @@ import {isUserAdmin} from "./firebase/apiCalls";
 import {useRecoilState} from "recoil";
 import {appState as appStateAtom} from "./atoms/appStateAtom";
 import AdminPage from "./components/Admin/AdminPage";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 
 function App() {
 
@@ -23,11 +24,30 @@ function App() {
     const auth = getAuth(app);
 
     useEffect(() => {
+        const uid = auth?.currentUser?.uid?.toString();
+        if (uid) {
+            const addToDatabase = async () => {
+                const userRef = doc(db, "users", uid);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists()) {
+                    await setDoc(userRef, {
+                        name: auth.currentUser.displayName,
+                        email: auth.currentUser.email,
+                        photoUrl: auth.currentUser.photoURL,
+                        uid: auth.currentUser.uid,
+                    });
+                }
+            }
+            addToDatabase()
+        }
+    }, []);
+
+    useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setIsUserSignedIn(true);
                 isUserAdmin(user.uid).then((response) => {
-                    console.log(response.data)
                     setAppState({...appState, isUserAdmin: response.data.isAdmin})
                 }).catch((error) => {
                     console.log(error)

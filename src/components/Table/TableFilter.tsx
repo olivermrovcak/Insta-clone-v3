@@ -104,7 +104,7 @@ function MultiAction({ selectedRowsLength}: MultiActionprops) {
 
 interface FilterProps {
     column: any
-    onChange: (filterString: string | number, columnId: string) => void
+    onChange: (filterString: string | number, columnId: string, isNumeric: boolean) => void
 }
 
 function Filter({column, onChange}: FilterProps) {
@@ -158,7 +158,7 @@ function DebouncedInput({
             className="input-field input-field--border-color"
             labelProps={{
                 className: "hidden ",
-            }} crossOrigin={undefined}/>
+            }} crossOrigin={undefined} onResize={undefined} onResizeCapture={undefined}/>
     )
 }
 

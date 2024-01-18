@@ -15,11 +15,10 @@ import {Table as MuiTable, TableBody, TableCell, TableHead, TableRow} from "@mui
 import axios from "axios";
 import TableFilter from "./TableFilter";
 import SouthIcon from "@mui/icons-material/South";
-import {Chip} from "@material-tailwind/react";
-import ColumnVisibilityHandler from "./ColumnVisibilityHandler";
 import {ErrorToast} from "../../utils/ToastUtils";
 import {getAuth} from "firebase/auth";
 import {app} from "../../firebase/firebase";
+import {columns} from "../../utils/columns/usersColumns";
 
 enum FilterType {
     EQUAL = "==",
@@ -30,7 +29,7 @@ interface TableProps {
     tableId: string
     columns: any
     url: string
-    onRowClick?: (data: any) => void
+    onRowClick?: (data: any, id: any) => void
     customSort?: any
     defaultColumnVisibility?: any
     defaultFilter?: string
@@ -104,17 +103,14 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
         getNextPageParam: (lastPage, allPages) => {
             // return the parameter for the next page based on the last page data
         },
-        keepPreviousData: true,
+        staleTime: Infinity, // data will never become stale
+        initialPageParam: 0,
     })
 
     const flatData = React.useMemo(
         () => data?.pages?.map(page => page).flat() ?? [],
         [data]
     )
-
-    useEffect(() => {
-        console.log(flatData)
-    }, [data]);
 
     const totalDBRowCount = data?.pages?.[0]?.totalElements ?? 0
     const totalFetched = flatData?.length

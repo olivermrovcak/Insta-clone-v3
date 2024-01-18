@@ -4,8 +4,9 @@ import ModalLikes from './Feed/ModalLikes';
 import {Outlet} from 'react-router';
 import ModalUpload from "./Nav/ModalUpload";
 import {useRecoilState} from "recoil";
-import {loadingState} from "../atoms/modalAtom";
+import {loadingState, searchBarOpened} from "../atoms/modalAtom";
 import {LinearProgress} from "@mui/material";
+import SearchBar from "./Nav/SearchBar";
 
 function Main() {
 
@@ -14,6 +15,7 @@ function Main() {
     return (
         <div className='bg-black h-screen overflow-y-scroll scrollbar-hide flex items-start !relative '>
             {isLoading && <LinearProgress className="!fixed !top-0 !w-screen !z-[1000] rainbow-linear-progress" color="inherit"/>}
+            <SearchBar/>
             <Header/>
             <Outlet/>
             <ModalLikes/>

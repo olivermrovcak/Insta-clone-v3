@@ -11,6 +11,8 @@ import {app} from "../../firebase/firebase";
 import {Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/react";
 import {deleteRepostedThread, deleteThread} from "../../firebase/apiCalls";
 import {SuccessToast} from "../../utils/ToastUtils";
+import ElipsisMenu from "./ElipsisMenu";
+import {reportThread} from "../../firebase/report";
 
 interface props {
     uid: string,
@@ -32,7 +34,6 @@ function Thread({uid, text, timeStamp, attachment, id, user, isRepost, repostId,
     const auth = getAuth(app as any);
 
     function handleSetOpenedThread() {
-        navigate(`/threads/${id}`)
         setOpenedThread({opened: true, id: id, uid: uid})
     }
 
@@ -66,11 +67,19 @@ function Thread({uid, text, timeStamp, attachment, id, user, isRepost, repostId,
         return auth.currentUser?.uid === uid;
     }
 
+    function handleReport() {
+        reportThread("gg", id).then((response: any) => {
+            console.log(response)
+        }).catch((error: any) => {
+
+        })
+    }
+
     return (
         <div
             className="text-white cursor-pointer transition-all
-             border-b  border-b-gray-200 border-opacity-20  flex flex-row w-full py-2">
-            <div className="min-h-full flex flex-col items-center !w-16 ">
+             border-b  border-b-gray-200 border-opacity-20  flex flex-row w-full py-2 overflow-x-hidden max-w-[470px]">
+            <div className="min-h-full flex flex-col items-center  min-w-16 ">
                 {user?.photoUrl ? (
                     <img className="rounded-full h-[32px] w-[32px] object-contain" src={user?.photoUrl} alt=""/>
                 ) : (
@@ -90,6 +99,7 @@ function Thread({uid, text, timeStamp, attachment, id, user, isRepost, repostId,
                     <CheckBadgeIcon className="h-5 text-blue-500 mx-2 mr-auto"/>
                     <ElipsisMenu handler={<EllipsisHorizontalIcon className="h-5 "/>}>
                         <MenuItem
+                            onClick={handleReport}
                             className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
                             onResize={undefined} onResizeCapture={undefined}>Nahlásiť</MenuItem>
                         {isOwner() &&
@@ -99,7 +109,7 @@ function Thread({uid, text, timeStamp, attachment, id, user, isRepost, repostId,
                         }
                     </ElipsisMenu>
                 </div>
-                <p onClick={handleSetOpenedThread} className="text-sm text-white ">{text}</p>
+                <p onClick={handleSetOpenedThread} className="text-sm text-white w-[80%] break-words ">{text}</p>
                 {attachment &&
                     <AttachmentRender url={attachment}/>
                 }
@@ -114,17 +124,3 @@ function Thread({uid, text, timeStamp, attachment, id, user, isRepost, repostId,
 
 export default Thread
 
-function ElipsisMenu({handler, children}: any) {
-    return (
-        <Menu placement="bottom-end">
-            <MenuHandler>
-                {handler}
-            </MenuHandler>
-            <MenuList
-                className="!z-[101] rounded-xl p-0 bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold [&>*]:last:!border-b-0"
-                onResize={undefined} onResizeCapture={undefined}>
-                {children}
-            </MenuList>
-        </Menu>
-    )
-}

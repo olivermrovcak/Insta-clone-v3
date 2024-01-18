@@ -1,7 +1,9 @@
 import React from 'react'
 import {HomeIcon} from "@heroicons/react/20/solid";
 import {Bars2Icon, MagnifyingGlassIcon} from "@heroicons/react/24/solid";
-import {ArrowUpOnSquareIcon, HeartIcon, UserIcon} from "@heroicons/react/24/outline";
+import {ArrowLeftIcon, ArrowUpOnSquareIcon, HeartIcon, UserIcon} from "@heroicons/react/24/outline";
+import { CSSTransition } from 'react-transition-group';
+import '../../styles/menu-fade.css';
 import {
     Menu,
     MenuHandler,
@@ -11,22 +13,31 @@ import {
 } from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
-import {threadAddModal} from "../../atoms/modalAtom";
+import {threadAddModal, threadOverview} from "../../atoms/modalAtom";
 
 function ThreadsMenu() {
 
 
     const navigate = useNavigate();
     const [, setOpenModal] = useRecoilState(threadAddModal)
+    const [openedThread, setOpenedThread] = useRecoilState(threadOverview);
 
     function handleOpenThreadModal() {
         setOpenModal(true)
     }
 
+    function handleGoBack() {
+        setOpenedThread({opened: false, id: "", uid: ""})
+    }
+
     return (
-        <div className="px-24 bg-[#0f0f0f] bg-opacity-90 backdrop-blur-md p-4 flex flex-row justify-between w-full sticky top-0 !z-[100]">
-            <div className="w-8  cursor-pointer">
-                <svg aria-label="Threads" className="invert " fill="var(--barcelona-primary-icon)" height="100%" role="img" viewBox="0 0 192 192" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <div
+            className="px-24 bg-[#0f0f0f] bg-opacity-90 backdrop-blur-md
+             flex flex-row justify-center w-full md:justify-between sticky
+            top-0 !z-[100] transition-all duration-300 my-4 md:my-2">
+            <div className="w-8  cursor-pointer ">
+                <svg aria-label="Threads" className="invert " fill="var(--barcelona-primary-icon)" height="100%"
+                     role="img" viewBox="0 0 192 192" width="100%" xmlns="http://www.w3.org/2000/svg">
                     <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616
                      44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.881
                       72.2328C81.6116 63.5383 90.6052 61.6848 97.2286 61.6848C97.3051 61.6848 97.3819 61.6848 97.4576 61.6855C105.707 61.7381 111.932
@@ -41,37 +52,68 @@ function ThreadsMenu() {
                         147.514 32.7883 163.921C47.2921 182.358 68.8816 191.806 96.9569 192H97.0695C122.03 191.827 139.624 185.292 154.118 170.811C173.081
                         151.866 172.51 128.119 166.26 113.541C161.776 103.087 153.227 94.5962 141.537 88.9883ZM98.4405 129.507C88.0005 130.095 77.1544
                         125.409 76.6196 115.372C76.2232 107.93 81.9158 99.626 99.0812 98.6368C101.047 98.5234 102.976 98.468 104.871 98.468C111.106
-                        98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"></path></svg>
+                        98.468 116.939 99.0737 122.242 100.233C120.264 124.935 108.662 128.946 98.4405 129.507Z"></path>
+                </svg>
             </div>
-            <div className="invert flex flex-row w-fit space-x-5 ">
-                <HomeIcon className="h-8 w-8 cursor-pointer "/>
-                <ElipsisMenu handler={ <MagnifyingGlassIcon className="h-8 w-8  cursor-pointer"/>}>
-                    <MenuItem
-                        className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 flex flex-row justify-start items-center space-x-5"
-                        onResize={undefined} onResizeCapture={undefined}>
-                        <Input icon={<MagnifyingGlassIcon className="h-8 w-8"/>} onResize={undefined}
-                               onResizeCapture={undefined} crossOrigin={undefined} />
-                    </MenuItem>
-                    <MenuItem
-                        className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 text-red-600 !rounded-b-none last:!border-b-0 "
-                        onResize={undefined} onResizeCapture={undefined}>Vymazať</MenuItem>
-                </ElipsisMenu>
-                <ArrowUpOnSquareIcon onClick={handleOpenThreadModal} className="h-8 w-8  cursor-pointer"/>
-                <HeartIcon className="h-8 w-8  cursor-pointer"/>
-                <UserIcon className="h-8 w-8  cursor-pointer"/>
+            <div className="hidden invert md:flex relative flex-row justify-center w-fit space-x-[5px] transition-all duration-200 ">
+                <CSSTransition
+                    in={openedThread.opened}
+                    timeout={500} // Set the duration of the transition in milliseconds
+                    classNames="fade" // Define your CSS class for transition
+                    unmountOnExit
+                >
+                <div
+                    onClick={handleGoBack}
+                    className={` header-item mr-24`}>
+                    <ArrowLeftIcon className="h-8 "/>
+                </div>
+                </CSSTransition>
+                <div className="header-item">
+                    <HomeIcon className="h-8 w-8   "/>
+                </div>
+                <div className="header-item">
+                    <ElipsisMenu handler={<MagnifyingGlassIcon className="h-8 w-8  cursor-pointer"/>}>
+                        <MenuItem
+                            className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 flex flex-row justify-start items-center space-x-5"
+                            onResize={undefined} onResizeCapture={undefined}>
+                            <Input icon={<MagnifyingGlassIcon className="h-8 w-8"/>} onResize={undefined}
+                                   onResizeCapture={undefined} crossOrigin={undefined}/>
+                        </MenuItem>
+                        <MenuItem
+                            className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 text-red-600 !rounded-b-none last:!border-b-0 "
+                            onResize={undefined} onResizeCapture={undefined}>Vymazať</MenuItem>
+                    </ElipsisMenu>
+                </div>
+                <div className="header-item">
+                    <ArrowUpOnSquareIcon onClick={handleOpenThreadModal} className="h-8 w-8  cursor-pointer"/>
+                </div>
+                <div className="header-item">
+                    <HeartIcon className="h-8 w-8  cursor-pointer"/>
+                </div>
+                <div className="header-item">
+                    <UserIcon className="h-8 w-8  cursor-pointer"/>
+                </div>
             </div>
             <Menu placement="top-end">
                 <MenuHandler>
-                    <Bars2Icon className="h-8 w-8 invert  cursor-pointer"/>
+                    <Bars2Icon className="h-8 w-8 invert cursor-pointer  absolute right-5 md:block md:relative md:right-0 md:-translate-y-[50%] md:top-[50%] "/>
                 </MenuHandler>
                 <MenuList
                     className="!z-[101] rounded-xl p-0 bg-[#0f0f0f]
                     border-gray-500 border border-opacity-20 text-white font-bold "
-                     onResize={undefined} onResizeCapture={undefined}>
-                    <MenuItem onClick={ () => navigate("/posts/following")} className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none "
+                    onResize={undefined} onResizeCapture={undefined}>
+                    <MenuItem
+                        onClick={handleOpenThreadModal}
+                        className="px-5 py-3 block sm:hidden  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
+                        onResize={undefined} onResizeCapture={undefined}>Pridať prispevok</MenuItem>
+
+                    <MenuItem onClick={() => navigate("/posts/following")}
+                              className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none "
                               onResize={undefined} onResizeCapture={undefined}>Spat na Instagram</MenuItem>
-                    <MenuItem className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
-                              onResize={undefined} onResizeCapture={undefined}>Odhlásiť sa</MenuItem>
+                    <MenuItem
+                        className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
+                        onResize={undefined} onResizeCapture={undefined}>Odhlásiť sa</MenuItem>
+
                 </MenuList>
             </Menu>
         </div>
