@@ -6,6 +6,7 @@ import {getAuth} from "firebase/auth";
 import {app} from '../../firebase/firebase';
 import {serverTimestamp} from 'firebase/firestore';
 import {uploadPost} from "../../firebase/apiCalls";
+import {ErrorToast, SuccessToast} from "../../utils/ToastUtils";
 
 function ModalUpload() {
     const auth = getAuth(app);
@@ -18,6 +19,10 @@ function ModalUpload() {
     //uploadne post 
     const handleUploadPost = async () => {
         if (loading) return;
+        if (captionRef.current.value.length > 100) {
+            ErrorToast("Caption je príliš dlhý. Maximálna dĺžka je 100 znakov");
+            return
+        }
         setLoading(true);
 
         const post = {
@@ -30,8 +35,8 @@ function ModalUpload() {
         }
 
         await uploadPost(post).then((response) => {
-            console.log(post)
             console.log(response);
+            SuccessToast("Post bol úspešne pridaný");
         }).catch((error) => {
             console.log(error);
         })
@@ -40,23 +45,28 @@ function ModalUpload() {
         setLoading(false);
         setSelectedFile(null);
     }
-    //prida obrazok k postu
+
     const addImageToPost = (e) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setSelectedFile(reader.result);
-        };
+        const file = e.target.files[0];
+        if (file.type === 'image/jpeg' || file.type === 'image/png') {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                setSelectedFile(reader.result);
+            };
+        } else {
+            ErrorToast("Zly typ suboru. Povolené sú len .jpeg a .png");
+        }
     }
 
     return (<Transition.Root show={open} as={Fragment}>
             <Dialog
                 as="div"
-                className="fixed z-1000 inset-0 overflow-y-auto"
+                className="  fixed !z-[9999] inset-0 overflow-y-auto"
                 onClose={setOpen}
             >
                 <div
-                    className='flex items-center justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+                    className='flex justify-center items-center w-full h-full p-4'>
                     <Transition.Child
                         as={Fragment}
                         enter='ease-out duration-300'
@@ -83,9 +93,9 @@ function ModalUpload() {
                         leaveFrom='opacity-100 translate-y-0 sm:scale-95'
                         leaveTo='opacity-0'
                     >
-                        <div className=' z-100 inline-block align-bottom  bg-white max-w-xl w-[100%] md:w-[70%]
+                        <div className='  inline-block align-bottom  bg-white max-w-xl w-[100%] md:w-[70%]
                     rounded-lg  pb-4 text-left overflow-hidden shadow-xl
-                    transform transition-all  sm:align-middle  absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] '>
+                    transform transition-all '>
                             <div className='flex items-center flex-col'>
                                 <div className='w-full h-10 border flex items-center justify-center '>
                                     <p className='font-semibold'>Vytvorit nový príspevok</p>
@@ -96,7 +106,7 @@ function ModalUpload() {
                                                           onClick={() => setSelectedFile(null)}
                                                           alt=""/>) : (
                                         <button onClick={() => filePickerRef.current.click()}
-                                                class="bg-blue-500 mt-3 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                                className="bg-blue-500 mt-3 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                             Vybrať zo zariadenia
                                         </button>)}
                                     <div>

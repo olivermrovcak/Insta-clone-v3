@@ -20,6 +20,7 @@ function Suggestions() {
 
     const [suggestions, setSuggestions] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
+
     useEffect(() => {
         const getUsers = async () => {
             setAllUsers([])

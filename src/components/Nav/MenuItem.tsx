@@ -9,17 +9,18 @@ interface MenuProps {
     icon: ReactNode
     link?: any
     onClick?: any
+    id?: string
 }
 
-export default function MenuItem({text, icon, link, onClick}: MenuProps) {
+export default function MenuItem({text, icon, link, onClick, id}: MenuProps) {
 
     const [isSearchBarOpened, setIsSearchBarOpened] = useRecoilState(searchBarOpened);
 
     return (
-        <Link to={link} onClick={onClick}
+        <Link  to={link} onClick={onClick}
               className="rounded-full hover:bg-gray-50 hover:bg-opacity-[6%] transition-all group">
-            <li className="flex flex-row items-center  ">
-                <div className="w-[30px] relative group-hover:scale-[105%]  ">
+            <li  className="flex flex-row items-center  ">
+                <div id={"searchButton"} className="w-[30px] relative group-hover:scale-[105%]  ">
                     {icon}
                 </div>
 

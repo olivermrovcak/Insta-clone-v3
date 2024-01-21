@@ -15,6 +15,7 @@
         @apply  p-6 hover:bg-gray-500 hover:bg-opacity-10
         rounded-lg cursor-pointer transition-all duration-300
     }
+
 }
 
 body {
@@ -154,6 +155,13 @@ code {
 
 .editableContent:focus::before {
     content: none;
+}
+
+.input-field {
+   color: white;
+}
+.input-field--error {
+    border-color: #c40606;
 }
 
 

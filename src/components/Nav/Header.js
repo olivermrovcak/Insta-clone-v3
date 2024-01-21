@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    PaperAirplaneIcon, MagnifyingGlassIcon, AtSymbolIcon, WrenchIcon
+    PaperAirplaneIcon, MagnifyingGlassIcon, AtSymbolIcon, WrenchIcon, FlagIcon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -53,10 +53,13 @@ function Header() {
         {/* NAV */}
         <ul className="flex flex-col text-white w-full  text-[16px] [&>*]:p-[14px] break-keep ">
             {appState.isUserAdmin && (
-                <MenuItem onClick={() => setIsSearchBarOpened(false)} text={"Admin"} icon={<WrenchIcon className="w-[26px]"/>} link={"/admin"}/>
+                <>
+                    <MenuItem  text={"Admin"} icon={<WrenchIcon className="w-[26px]"/>} link={"/admin"}/>
+                    <MenuItem  text={"Reports"} icon={<FlagIcon className="w-[26px]"/>} link={"/reports"}/>
+                </>
             )}
             <MenuItem text={"Domov"} icon={<HomeIcon className="w-[26px]"/>} link={"/posts/following"}/>
-            <MenuItem onClick={() => handleSearchBarOpen()} text={"Hľadať"}
+            <MenuItem  onClick={() => handleSearchBarOpen()} text={"Hľadať"}
                       icon={<MagnifyingGlassIcon className="w-[26px]"/>}/>
             <MenuItem text={"Preskúmať"} icon={<StopIcon className="w-[26px]"/>} link={"/"}/>
             <MenuItem text={"Upozornenia"} icon={<PaperAirplaneIcon className="w-[26px]"/>} link={"/"}/>

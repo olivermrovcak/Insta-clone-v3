@@ -7,20 +7,27 @@ import {deletePost} from "../../../firebase/apiCalls";
 import {useRecoilState} from "recoil";
 import {modalStateAdd, postUpdateModal, reportModal} from "../../../atoms/modalAtom";
 import {Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/react";
-import {Bars2Icon} from "@heroicons/react/24/solid";
+import {Bars2Icon, EllipsisHorizontalIcon} from "@heroicons/react/24/solid";
+import ElipsisMenu from "../../ThreadsFeed/ElipsisMenu";
+import {ErrorToast, SuccessToast} from "../../../utils/ToastUtils";
 
 interface Props {
     imgSrc: any,
     uId: string,
     userName: any,
     postId?: string
+    refresh?: () => void
 }
 
-export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
+export default function PostHeader({imgSrc, uId, userName, postId, refresh}: Props) {
 
     const auth = getAuth(app as any);
     const [editDialogOpened, setEditDialogOpened] = useRecoilState(postUpdateModal);
     const [reportModalState, setReportModalState] = useRecoilState(reportModal);
+
+    function isOwner() {
+        return auth.currentUser?.uid === uId;
+    }
 
     function handleEdit() {
         setEditDialogOpened({
@@ -30,15 +37,20 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
     }
 
     function handleDelete() {
-        deletePost(postId ?? "").then((response: any ) =>  {
-            console.log(response)
+        deletePost(postId ?? "").then((response: any) => {
+            SuccessToast("Príspevok bol vymazaný");
+            refresh();
+        }).catch((error: any) => {
+            console.log(error);
+            ErrorToast("Nepodarilo sa vymazať príspevok");
         });
     }
 
     function handleReportPost() {
         setReportModalState({
             opened: true,
-            id: postId
+            id: postId,
+            type: "post"
         })
     }
 
@@ -69,24 +81,22 @@ export default function PostHeader({imgSrc, uId, userName, postId}: Props) {
                 </div>
             )}
         </div>
+            <ElipsisMenu handler={<EllipsisHorizontalIcon className="h-5 cursor-pointer "/>}>
+                <MenuItem
+                    onClick={handleReportPost}
+                    className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 !rounded-b-none last:!border-b-0 "
+                    onResize={undefined} onResizeCapture={undefined}>Nahlásiť</MenuItem>
+                {isOwner() &&
+                    <>
+                        <MenuItem onClick={handleEdit}
+                                  className="px-5 py-3  border-b border-b-gray-500 border-opacity-20  !rounded-b-none last:!border-b-0 "
+                                  onResize={undefined} onResizeCapture={undefined}>Upraviť</MenuItem>
+                        <MenuItem onClick={handleDelete}
+                                  className="px-5 py-3  border-b border-b-gray-500 border-opacity-20 text-red-600 !rounded-b-none last:!border-b-0 "
+                                  onResize={undefined} onResizeCapture={undefined}>Vymazať</MenuItem>
 
-        {auth.currentUser?.uid === uId ? (
-            <div className="space-x-2 flex flex-row">
-                <PencilIcon onClick={handleEdit} className="h-5  cursor-pointer"/>
-                <TrashIcon onClick={handleDelete} className="h-5  cursor-pointer"/>
-            </div>
-        ) : (
-            <Menu placement="bottom">
-                <MenuHandler>
-                    <EllipsisHorizontalCircleIcon className="h-5 cursor-pointer hover:scale-[110%] transition-all"/>
-                </MenuHandler>
-                <MenuList
-                    className="!z-[101] bg-[#0f0f0f] border-gray-500 border border-opacity-20 text-white font-bold "
-                    onResize={undefined} onResizeCapture={undefined}>
-                    <MenuItem onClick={handleReportPost} className="hover:bg-gray-100 hover:bg-opacity-10 text  !px-4 !py-1"
-                              onResize={undefined} onResizeCapture={undefined}>Nahlásiť</MenuItem>
-                </MenuList>
-            </Menu>
-        )}
+                    </>
+                }
+            </ElipsisMenu>
     </div>;
 }

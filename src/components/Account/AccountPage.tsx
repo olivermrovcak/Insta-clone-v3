@@ -29,7 +29,7 @@ function AccountPage() {
     const [posts, setPosts] = useState<post[]>();
     const [followersCount, setFollowersCount] = useState<number>();
     const [followingCount, setFollowingCount] = useState<number>();
-    
+
     async function fetchPosts() {
         try {
             const posts = await getPosts();
@@ -63,14 +63,18 @@ function AccountPage() {
             <Header/>
             <section className="w-full flex flex-col items-center">
                 <div className="flex flex-col items-center  max-w-[1000px] h-full px-14 py-6">
-                    <UserInformation
-                        user={user as user}
-                        postsCount={posts?.length ?? 0}
-                        followersCount={followersCount ?? 0}
-                        followingCount={followingCount ?? 0}
-                    />
-                    <Stories user={user as user}/>
-                    <PostsGrid posts={posts as post[]}/>
+                    {user &&
+                        <>
+                            <UserInformation
+                                user={user as user}
+                                postsCount={posts?.length ?? 0}
+                                followersCount={followersCount ?? 0}
+                                followingCount={followingCount ?? 0}
+                            />
+                            <Stories user={user as user}/>
+                            <PostsGrid posts={posts as post[]}/>
+                        </>
+                    }
                 </div>
             </section>
         </div>

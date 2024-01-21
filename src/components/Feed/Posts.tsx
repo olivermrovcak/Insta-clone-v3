@@ -6,16 +6,18 @@ import {Post as PostType} from "../../utils/types/Post";
 import {getAllPosts, getFollowingPosts} from '../../firebase/apiCalls';
 import PostUpdateModal from "./Post/PostModal/PostUpdateModal";
 import PostModal from "./Post/PostModal/PostModal";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import ReportModal from "./ReportModal";
+import {CameraIcon} from "@heroicons/react/24/outline";
 
 function Posts() {
 
+    const location = useLocation();
     const path = window.location.pathname;
 
     const [dataForPostModal, setDataForPostModal] = useRecoilState(postDataForModal)
     const [posts, setPosts] = useState<PostType[]>([]);
-    const [, setIsLoading] = useRecoilState(loadingState)
+    const [isLoading, setIsLoading] = useRecoilState(loadingState)
 
     async function getPosts() {
         try {
@@ -54,7 +56,7 @@ function Posts() {
 
     return (
         <div className="max-w-[470px] mx-auto">
-            {posts.map((post) => (
+            {posts.length > 1 ? posts.map((post) => (
                 <Post key={post.id}
                       id={post.id}
                       username={post.username}
@@ -62,8 +64,20 @@ function Posts() {
                       postImg={post.image}
                       caption={post.caption}
                       userId={post.uid}
+                      refresh={getPosts}
                 />
-            ))}
+            )) : (
+                <>
+                    {!isLoading &&
+                        <div className="w-full h-[309px] flex flex-col justify-center items-center  text-[#737373] col-span-3">
+                            <div className="p-4 border border-[#737373] rounded-full flex justify-center items-center mb-10">
+                                <CameraIcon className="h-8 " />
+                            </div>
+                            <p className="text-xl text-white font bold">ŽIADNE PRÍSPEVKY</p>
+                        </div>
+                    }
+                </>
+                )}
             <PostUpdateModal/>
             <PostModal opened={dataForPostModal.opened} onClose={handleClose} postId={dataForPostModal.id}/>
             <ReportModal/>

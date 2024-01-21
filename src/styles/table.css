@@ -2,12 +2,12 @@
 
 @layer components {
     .table-section {
-        @apply flex flex-col w-full h-[90%] relative overflow-hidden shadow-lg rounded-md bg-[#1e2a37]
+        @apply flex flex-col w-full h-[90%] relative overflow-hidden shadow-lg rounded-md
     }
 
     .table-wrapper {
         @apply block  overflow-x-scroll h-[100%] w-full
-        overflow-y-scroll  border rounded-md bg-[#1e2a37]
+        overflow-y-scroll  border rounded-md bg-white
     }
 
     .table-header-td {

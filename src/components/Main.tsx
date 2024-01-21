@@ -14,7 +14,7 @@ function Main() {
 
     return (
         <div className='bg-black h-screen overflow-y-scroll scrollbar-hide flex items-start !relative '>
-            {isLoading && <LinearProgress className="!fixed !top-0 !w-screen !z-[1000] rainbow-linear-progress" color="inherit"/>}
+            {isLoading && <LinearProgress className="!fixed !top-0 !w-screen !z-[9999] rainbow-linear-progress" color="inherit"/>}
             <SearchBar/>
             <Header/>
             <Outlet/>

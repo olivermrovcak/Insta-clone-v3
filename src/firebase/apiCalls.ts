@@ -9,7 +9,7 @@ import {Thread} from "../utils/types/Thread";
 
 const auth = getAuth(app as any);
 
-const devUrl = "http://127.0.0.1:5001/oliverminstaclone/us-central1";
+const devUrl = "https://us-central1-oliverminstaclone.cloudfunctions.net";
 const prodUrl = "https://us-central1-oliverminstaclone.cloudfunctions.net";
 
 export async function getUserByUid(uid: string) {
@@ -234,6 +234,12 @@ export async function getDataFromFirebase(path: string) {
     const postsCol = collection(db, path);
     const postsSnapshot = await getDocs(postsCol);
     return postsSnapshot.docs.map(doc => doc.data());
+}
+
+export async function getRawDataFromFirebase(path: string) {
+    const postsCol = collection(db, path);
+    const postsSnapshot = await getDocs(postsCol);
+    return postsSnapshot.docs.map(doc => doc);
 }
 
 export async function getFollowersIds(userId: string) {

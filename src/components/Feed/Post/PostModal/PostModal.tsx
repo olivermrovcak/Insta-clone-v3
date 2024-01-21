@@ -9,6 +9,7 @@ import ModalCommentForm from "./ModalCommentForm";
 import ModalCaption from "./ModalCaption";
 import ModalHeader from "./ModalHeader";
 import {getPostById} from "../../../../firebase/apiCalls";
+import {db} from "../../../../firebase/firebase";
 
 interface Props {
     opened: boolean,
@@ -30,39 +31,27 @@ export default function PostModal({opened, onClose, postId}: Props) {
 
     useEffect(() => {
         getPost();
-    }, [postId])
+    }, [postId,db])
 
     return <Modal
         open={opened}
         onClose={onClose}
     >
-        <section
-            className="absolute w-[90vw] sm:w-[70vw] md:w-[50vw] min-h-[60vh]   select-none ring-0 focus:ring-0 border-none  -translate-y-[50%] -translate-x-[50%] left-[50%] top-[50%] grid grid-cols-1 sm:grid-cols-2  ">
-
+        <section className="absolute w-[90vw] sm:w-[70vw] md:w-[90vw] min-h-[60vh] select-none ring-0 focus:ring-0 border-none  -translate-y-[50%] -translate-x-[50%] left-[50%] top-[50%] grid grid-cols-1 sm:grid-cols-2  ">
             <div className=" bg-black flex justify-center items-center  max-w-[90vw] ">
                 <img
                     src={post?.image}
                     className="object-cover w-full"
                 />
             </div>
-
             <div className="bg-black text-white flex flex-col ">
-
-                {/*HEADER*/}
                 <ModalHeader userName={post?.username} profileImg={post?.profileImg}/>
-
-                <div
-                    className="w-full p-3 flex flex-1  items-start flex-col overflow-y-scroll scrollbar-hide max-h-[300px] ">
-                    {/*CAPTION */}
+                <div className="w-full p-3 flex flex-1  items-start flex-col overflow-y-scroll scrollbar-hide basis-24 md:basis-64  ">
                     <ModalCaption post={post}/>
-                    {/*COmments*/}
                     <PostModalComments comments={post?.comments}/>
                 </div>
-
-                {/*Action list*/}
-                <ModalActionList likesCount={0}/>
-                {/*Post Comment*/}
-                <ModalCommentForm/>
+                <ModalActionList  postId={postId}/>
+                <ModalCommentForm postId={postId} />
             </div>
         </section>
     </Modal>;
@@ -76,7 +65,7 @@ function PostModalComments({comments}: PostModalCommentProps) {
     return <>
         {comments ? (
             comments?.map((comment, id) => (
-                <div key={id} className="w-full flex flex-row mb-2">
+                <div key={id + comment?.uid} className="w-full flex flex-row mb-2">
                     <img
                         src={comment?.userImage}
                         className="h-[32px] w-[32px] object-contain mr-2 rounded-full"

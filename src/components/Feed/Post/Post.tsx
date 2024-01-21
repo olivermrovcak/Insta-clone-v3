@@ -12,16 +12,17 @@ interface Props {
     userImg: any,
     postImg: any,
     caption: string,
-    userId: string
+    userId: string,
+    refresh: () => void
 }
 
-export default function Post({id, username, userImg, postImg, caption, userId}: Props) {
+export default function Post({id, username, userImg, postImg, caption, userId, refresh}: Props) {
 
     return (
         <article className='bg-black text-white my-7'>
 
             {/* HEADER */}
-            <PostHeader userName={username} imgSrc={userImg} uId={userId} postId={id}/>
+            <PostHeader userName={username} imgSrc={userImg} uId={userId} postId={id} refresh={refresh}/>
 
             {/* POST IMG*/}
             <PostImg imgSrc={postImg} postId={id}/>

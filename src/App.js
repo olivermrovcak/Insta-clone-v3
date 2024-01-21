@@ -1,4 +1,4 @@
-import {Routes, Route, BrowserRouter, useNavigate} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import './index.css';
 import React, {useState, useEffect} from "react";
 import SignIn from "./components/SignIn/SignIn";
@@ -16,6 +16,7 @@ import {useRecoilState} from "recoil";
 import {appState as appStateAtom} from "./atoms/appStateAtom";
 import AdminPage from "./components/Admin/AdminPage";
 import {doc, getDoc, setDoc} from "firebase/firestore";
+import ReportsPage from "./components/Admin/ReportsPage";
 
 function App() {
 
@@ -69,7 +70,10 @@ function App() {
                         <>
                             <Route path="/" element={<Main/>}>
                                 {appState.isUserAdmin && (
-                                    <Route path="admin" element={<AdminPage/>}/>
+                                    <>
+                                        <Route path="admin" element={<AdminPage/>}/>
+                                        <Route path="reports" element={<ReportsPage/>}/>
+                                    </>
                                 )}
                                 <Route path="/posts" element={<Feed/>}>
                                     <Route path="following" element={<Feed/>}/>

@@ -4,10 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="added searching">
+    <list default="true" id="a1c3875a-a68f-4aff-a64d-53198a29bb80" name="Changes" comment="fixed the closing of searchBar">
+      <change afterPath="$PROJECT_DIR$/src/components/Admin/ReportsPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Table/actions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/ReactHookFormUtils.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/apiCalls/postFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atoms/modalAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms/modalAtom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Account/AccountPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account/AccountPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Account/UserInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Account/UserInformation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/ActionList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/Post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalActionList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalCommentForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/ModalCommentForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Post/PostModal/PostModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/ReportModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/ReportModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Feed/Stories.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Stories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Nav/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/MenuItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Nav/ModalUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/ModalUpload.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Nav/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/Suggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/Suggestions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/AddThreadModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadAddComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThreadsFeed/ThreadAddComment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase/apiCalls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/apiCalls.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebase/report.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/report.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/table.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +82,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/src/styles&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/olivermrovcak/Desktop/aaa/REACT/INSTA/src/utils&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -68,9 +96,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src/styles" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -181,7 +209,12 @@
       <workItem from="1705238672245" duration="5590000" />
       <workItem from="1705252354751" duration="14531000" />
       <workItem from="1705315712667" duration="18849000" />
-      <workItem from="1705578484355" duration="8444000" />
+      <workItem from="1705578484355" duration="11922000" />
+      <workItem from="1705680004886" duration="4378000" />
+      <workItem from="1705700317223" duration="3198000" />
+      <workItem from="1705737925777" duration="379000" />
+      <workItem from="1705765665778" duration="14825000" />
+      <workItem from="1705854240280" duration="10496000" />
     </task>
     <task id="LOCAL-00001" summary="add git ignore">
       <option name="closed" value="true" />
@@ -279,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705587383348</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed the closing of searchBar">
+      <option name="closed" value="true" />
+      <created>1705587538967</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1705587538967</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +379,7 @@
     <MESSAGE value="added tanstack-table and query from recent projects" />
     <MESSAGE value="refactored the table for app use" />
     <MESSAGE value="added searching" />
-    <option name="LAST_COMMIT_MESSAGE" value="added searching" />
+    <MESSAGE value="fixed the closing of searchBar" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the closing of searchBar" />
   </component>
 </project>

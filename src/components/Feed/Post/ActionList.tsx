@@ -61,9 +61,7 @@ export default function ActionList({postId}: Props) {
         </div>
         <PostLikes likesCount={likes.length}/>
     </div>
-
 }
-
 
 function LikeBtn(props: { hasLiked: boolean, onClick: () => Promise<void> }) {
     return <>

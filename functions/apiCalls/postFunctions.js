@@ -76,7 +76,7 @@ module.exports.getPost = functions.https.onRequest((request, response) => {
             }
 
             // Get the comments subcollection
-            const commentsSnapshot = await admin.firestore().collection('posts').doc(postId).collection('comments').get();
+            const commentsSnapshot = await admin.firestore().collection('posts').doc(postId).collection('comments').orderBy('timeStamp', 'desc').get();
             const comments = commentsSnapshot.docs.map(doc => doc.data());
 
             // Combine the post data and comments into a single object
@@ -103,8 +103,8 @@ module.exports.uploadPost = functions.https.onRequest((request, response) => {
                 return response.status(400).send('Missing required fields');
             }
 
-            if (caption.length > 300) {
-                return response.status(400).send('Caption is too long. Maximum length is 300 characters.');
+            if (caption.length > 100) {
+                return response.status(400).send('Caption is too long. Maximum length is 100 characters.');
             }
 
             const mimeType = selectedFile.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];

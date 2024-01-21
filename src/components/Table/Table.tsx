@@ -4,6 +4,7 @@ import {
     getCoreRowModel,
     getSortedRowModel,
     useReactTable,
+    getPaginationRowModel
 } from '@tanstack/react-table'
 import {
     useInfiniteQuery,
@@ -11,14 +12,14 @@ import {
 
 import '../../styles/table.css';
 
-import {Table as MuiTable, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Table as MuiTable, TableBody, TableCell, TableHead, TablePagination, TableRow} from "@mui/material";
 import axios from "axios";
 import TableFilter from "./TableFilter";
 import SouthIcon from "@mui/icons-material/South";
 import {ErrorToast} from "../../utils/ToastUtils";
 import {getAuth} from "firebase/auth";
 import {app} from "../../firebase/firebase";
-import {columns} from "../../utils/columns/usersColumns";
+import TablePaginationActions from './actions'
 
 enum FilterType {
     EQUAL = "==",
@@ -192,6 +193,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         onRowSelectionChange: setRowSelection,
+        getPaginationRowModel: getPaginationRowModel(),
         autoResetPageIndex: false,
     });
 
@@ -224,6 +226,8 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
         zIndex: 3,
     } as const;
 
+    const { pageSize, pageIndex } = table.getState().pagination
+
     return (
         <>
             <section className="table-section">
@@ -242,7 +246,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
                             <TableFilter tableRef={table} filterChange={setGlobalFilter} deleteAction={() => {
                             }}/>
                             {table.getHeaderGroups().map(headerGroup => (
-                                <TableRow key={headerGroup.id} className="!bg-[#FCFCFD] dark:!bg-ssk-dark-hover ">
+                                <TableRow key={headerGroup.id} className=" ">
                                     {headerGroup.headers.map(header => (
                                         <th key={header.id} className="table-header-th "
                                             style={{width: header.getSize() === Number.MAX_SAFE_INTEGER ? "auto" : header.getSize()}}
@@ -277,7 +281,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
                             {table.getRowModel().rows.map(row => (
                                 <TableRow key={row.id}
                                           className={`${Object.hasOwn(table.getState().rowSelection, row.id) && "bg-opacity-[3%] "} 
-                                          cursor-pointer hover:bg-disabled hover:bg-blue-50 dark:hover:bg-ssk-dark  `}
+                                          cursor-pointer hover:bg-disabled   `}
                                           onClick={() => {
                                               if (!table.getIsSomeRowsSelected()) {
                                                   handleRowClick(row?.original as any, row.index)
@@ -286,7 +290,7 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
                                 >
                                     {row.getVisibleCells().map(cell => (
                                         <TableCell key={cell.id}
-                                                   className="!py-1 dark:!text-gray-400 dark:!border-ssk-dark-border "
+                                                   className="!py-1  "
                                         >
                                             <>
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -297,6 +301,25 @@ const Table = forwardRef<TableRefCallbacks, TableProps>(({
                             ))}
                         </TableBody>
                     </MuiTable>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: data?.pages.length }]}
+                        component="div"
+                        count={table.getFilteredRowModel().rows.length}
+                        rowsPerPage={pageSize}
+                        page={pageIndex}
+                        SelectProps={{
+                            inputProps: { 'aria-label': 'rows per page' },
+                            native: true,
+                        }}
+                        onPageChange={(_, page) => {
+                            table.setPageIndex(page)
+                        }}
+                        onRowsPerPageChange={e => {
+                            const size = e.target.value ? Number(e.target.value) : 10
+                            table.setPageSize(size)
+                        }}
+                        ActionsComponent={TablePaginationActions}
+                    />
                     {totalDBRowCount === totalFetched ? (
                         <p className="py-1 px-7 text-gray-500 text-sm">Zobrazené všetky záznamy</p>
                     ) : null}

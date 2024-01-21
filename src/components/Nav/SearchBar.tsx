@@ -1,9 +1,8 @@
 import {Input} from "@material-tailwind/react";
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {useRecoilState} from "recoil";
 import {searchBarOpened} from "../../atoms/modalAtom";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
-import {firestore} from "firebase-admin";
 import {db} from "../../firebase/firebase";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {Link} from "react-router-dom";
@@ -13,6 +12,7 @@ function SearchBar() {
     const [isSearchBarOpened,setIsSearchBarOpened] = useRecoilState(searchBarOpened);
     const [users, setUsers] = React.useState([])
     const [search, setSearch] = React.useState("")
+    const searchBarRef = useRef(null);
 
     function getUsersByUsername(username) {
         if (!username) {
@@ -39,12 +39,26 @@ function SearchBar() {
         getUsersByUsername(search)
         return () => {
             setUsers([])
-            setIsSearchBarOpened(false)
         }
     }, [search]);
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            const searchButton = document.getElementById('searchButton');
+            if (searchBarRef.current && !searchBarRef.current.contains(event.target) &&
+                searchButton && !searchButton.contains(event.target)) {
+                setIsSearchBarOpened(false);
+                setSearch("");
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [searchBarRef, setIsSearchBarOpened]);
+
     return (
-        <div className={`border border-gray-200 border-opacity-20 
+        <div ref={searchBarRef} className={`border border-gray-200 border-opacity-20 
             h-screen  absolute  top-0 pl-24 pr-4 pt-6
             transition-all duration-1000 bg-black rounded-xl 
             z-[1000]
@@ -55,8 +69,9 @@ function SearchBar() {
                    labelProps={{
                        className: "hidden",
                    }}
-                   className="bg-gray-800 border-none focus:ring-0 text-white "
+                   className="!bg-gray-800 border-none focus:ring-0 text-white "
                    onChange={(e) => setSearch(e.target.value)}
+                   value={search}
                    placeholder={"Hľadať"}
                    onResize={undefined}
                    onResizeCapture={undefined} crossOrigin={undefined}
